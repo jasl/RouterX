@@ -1,7 +1,7 @@
 import Foundation
 
 public struct RoutingPatternScanner {
-    private let stopWordsSet: Set<Character> = ["(", ")", "/"]
+    private static let stopWordsSet: Set<Character> = ["(", ")", "/"]
 
     public let expression: String
 
@@ -45,7 +45,7 @@ public struct RoutingPatternScanner {
         var fragment = ""
         var stepPosition = 0
         for char in self.unScannedFragment.characters {
-            if stopWordsSet.contains(char) {
+            if RoutingPatternScanner.stopWordsSet.contains(char) {
                 break
             }
 

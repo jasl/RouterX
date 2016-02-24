@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/jasl/Workspace/swift/RouterX/Demo.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=1162&amp;EndingLineNumber=37&amp;StartingLineNumber=37&amp;Timestamp=478042983.79232"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

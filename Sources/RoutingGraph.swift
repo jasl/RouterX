@@ -36,11 +36,29 @@ public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
 }
 
 public class RouteVertex {
+    private static let stopWordsSet: Set<Character> = [".", "/"]
+    private static let placeholderPrefixsSet: Set<Character> = [":", "*"]
+
     public typealias HandlerType = ([String:String] -> Void)
+
+    public private(set) var pattern: String
+    public private(set) lazy var placeholderMappings: [String: Int] = {
+        var placeholderMappings: [String: Int] = [:]
+
+        let splitedPattern = self.pattern.characters.split(allowEmptySlices: true) { RouteVertex.stopWordsSet.contains($0) }.map(String.init)
+        for (index, element) in splitedPattern.enumerate() {
+            if let prefix = element.characters.first where RouteVertex.placeholderPrefixsSet.contains(prefix) {
+                let placeholder = element.substringFromIndex(element.startIndex.successor())
+                let i = index * 2 - 1
+                placeholderMappings[placeholder] = i > 0 ? i : 0
+            }
+        }
+
+        return placeholderMappings
+    }()
 
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
     public var handler: HandlerType?
-    public var pattern: String
 
     public init(pattern: String, handler: HandlerType? = nil) {
         self.pattern = pattern
@@ -64,19 +82,9 @@ public class RouteVertex {
         case .Literal(let value):
             return self.nextRoutes[.Literal(value)] ?? self.nextRoutes[.Any]
         default:
-            fatalError("Unexpect \(token)")
+            return nil
         }
     }
-}
-
-extension RouteVertex: Hashable, Equatable {
-    public var hashValue: Int {
-        return self.pattern.hashValue
-    }
-}
-
-public func == (lhs: RouteVertex, rhs: RouteVertex) -> Bool {
-    return lhs.hashValue == rhs.hashValue
 }
 
 extension RouteVertex: CustomDebugStringConvertible {
@@ -118,7 +126,7 @@ extension RouteVertex: CustomDebugStringConvertible {
                 string += ":F"
             }
 
-            string += ":\(self.pattern)"
+            string += ":\(self.pattern) \(self.placeholderMappings.map { (k,v) in "\(k): \(v)" })"
 
             string += ">\n"
         }
