@@ -32,8 +32,8 @@ try! RoutingPatternParser.parseAndAppendTo(rootRoute, routingPatternTokens: toke
 
 print(rootRoute)
 
-let uri = "/articles/page/2/sort/recent.json"
+let path = "/articles/page/2/sort/recent.json"
 
-let matchedRoute = match(uri, route: rootRoute)
+let matchedRoute = matchRouteByURIPath(path, rootRoute: rootRoute)
 
 print(matchedRoute)

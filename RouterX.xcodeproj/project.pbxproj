@@ -20,9 +20,9 @@
 		C430948C1C7C28D00038A0EC /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094881C7C28D00038A0EC /* RoutingGraph.swift */; };
 		C430948D1C7C28D00038A0EC /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094881C7C28D00038A0EC /* RoutingGraph.swift */; };
 		C430948E1C7C28D00038A0EC /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094881C7C28D00038A0EC /* RoutingGraph.swift */; };
-		C430948F1C7C28D00038A0EC /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* Matcher.swift */; };
-		C43094901C7C28D00038A0EC /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* Matcher.swift */; };
-		C43094911C7C28D00038A0EC /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* Matcher.swift */; };
+		C430948F1C7C28D00038A0EC /* URIPathMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* URIPathMatcher.swift */; };
+		C43094901C7C28D00038A0EC /* URIPathMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* URIPathMatcher.swift */; };
+		C43094911C7C28D00038A0EC /* URIPathMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43094891C7C28D00038A0EC /* URIPathMatcher.swift */; };
 		C43094921C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */; };
 		C43094931C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */; };
 		C43094941C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */; };
@@ -40,6 +40,9 @@
 		C4F19A081C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */; };
 		C4F19A091C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */; };
 		C4F19A0A1C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */; };
+		C4F19A0C1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */; };
+		C4F19A0D1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */; };
+		C4F19A0E1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +75,7 @@
 		C418DEE11C7D0A9B00630170 /* RoutingPatternScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternScannerTests.swift; sourceTree = "<group>"; };
 		C43094861C7B842C0038A0EC /* RouterX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterX.swift; sourceTree = "<group>"; };
 		C43094881C7C28D00038A0EC /* RoutingGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingGraph.swift; sourceTree = "<group>"; };
-		C43094891C7C28D00038A0EC /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
+		C43094891C7C28D00038A0EC /* URIPathMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathMatcher.swift; sourceTree = "<group>"; };
 		C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternParser.swift; sourceTree = "<group>"; };
 		C47B8A4A1C7B4EE000C2C164 /* RouterX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47B8A4D1C7B4EE000C2C164 /* RouterX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RouterX.h; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		C47B8AB51C7B554900C2C164 /* RouterXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternParserTests.swift; sourceTree = "<group>"; };
 		C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingGraphTests.swift; sourceTree = "<group>"; };
+		C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathScannerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 				C418DEE11C7D0A9B00630170 /* RoutingPatternScannerTests.swift */,
 				C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */,
 				C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */,
+				C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -185,7 +190,7 @@
 				C43094881C7C28D00038A0EC /* RoutingGraph.swift */,
 				C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */,
 				C418DEDA1C7D0A8000630170 /* RoutingPatternToken.swift */,
-				C43094891C7C28D00038A0EC /* Matcher.swift */,
+				C43094891C7C28D00038A0EC /* URIPathMatcher.swift */,
 				C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */,
 				C43094861C7B842C0038A0EC /* RouterX.swift */,
 			);
@@ -444,7 +449,7 @@
 				C430948C1C7C28D00038A0EC /* RoutingGraph.swift in Sources */,
 				C418DEDB1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
 				C418DEDE1C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
-				C430948F1C7C28D00038A0EC /* Matcher.swift in Sources */,
+				C430948F1C7C28D00038A0EC /* URIPathMatcher.swift in Sources */,
 				C43094871C7B842C0038A0EC /* RouterX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +460,7 @@
 			files = (
 				C4F19A081C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A041C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
+				C4F19A0C1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,
 				C418DEE21C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43094901C7C28D00038A0EC /* Matcher.swift in Sources */,
+				C43094901C7C28D00038A0EC /* URIPathMatcher.swift in Sources */,
 				C43094981C7C2C3E0038A0EC /* RouterX.swift in Sources */,
 				C418DEDC1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
 				C418DEDF1C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
@@ -478,6 +484,7 @@
 			files = (
 				C4F19A091C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A051C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
+				C4F19A0D1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,
 				C418DEE31C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,7 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43094911C7C28D00038A0EC /* Matcher.swift in Sources */,
+				C43094911C7C28D00038A0EC /* URIPathMatcher.swift in Sources */,
 				C43094991C7C2C3F0038A0EC /* RouterX.swift in Sources */,
 				C418DEDD1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
 				C418DEE01C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
@@ -501,6 +508,7 @@
 			files = (
 				C4F19A0A1C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A061C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
+				C4F19A0E1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,
 				C418DEE41C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

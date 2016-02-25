@@ -126,7 +126,7 @@ extension RouteVertex: CustomDebugStringConvertible {
                 string += ":F"
             }
 
-            string += ":\(self.pattern) \(self.placeholderMappings.map { (k,v) in "\(k): \(v)" })"
+            string += ":\(self.pattern) \(self.placeholderMappings.map { (k, v) in "\(k): \(v)" })"
 
             string += ">\n"
         }
