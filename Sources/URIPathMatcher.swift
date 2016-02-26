@@ -1,7 +1,7 @@
 import Foundation
 
 public enum RouteMatchingResult {
-    case Matched(parameters: [String:String], handler: RouteVertex.HandlerType, pattern: String)
+    case Matched(parameters: [String:String], handler: RouteTerminalHandlerType, pattern: String)
     case UnMatched
 }
 
@@ -125,37 +125,4 @@ public struct URIPathScanner {
 
         return tokens
     }
-}
-
-public func matchRouteByURIPath(path: String, rootRoute: RouteVertex) -> RouteMatchingResult {
-    let tokens = URIPathScanner.tokenize(path)
-
-    if tokens.isEmpty {
-        return .UnMatched
-    }
-
-    var tokensGenerator = tokens.generate()
-    var targetRoute: RouteVertex = rootRoute
-    while let token = tokensGenerator.next() {
-        if let currentRoute = targetRoute.toNextVertex(token.routeEdge) {
-            targetRoute = currentRoute
-        } else {
-            return .UnMatched
-        }
-    }
-
-    guard targetRoute.isTerminal else {
-        return .UnMatched
-    }
-
-    var parameters: [String: String] = [:]
-    for (k, i) in targetRoute.placeholderMappings {
-        if case .Literal(let value) = tokens[i] {
-            parameters[k] = value
-        } else {
-            parameters[k] = ""
-        }
-    }
-
-    return .Matched(parameters: parameters, handler: targetRoute.handler!, pattern: targetRoute.pattern)
 }

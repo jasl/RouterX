@@ -34,6 +34,9 @@
 		C47B8AC41C7B5A9C00C2C164 /* RouterX.h in Headers */ = {isa = PBXBuildFile; fileRef = C47B8A4D1C7B4EE000C2C164 /* RouterX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C47B8AC61C7B5AB300C2C164 /* RouterX.h in Headers */ = {isa = PBXBuildFile; fileRef = C47B8A4D1C7B4EE000C2C164 /* RouterX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C47B8AC71C7B5ABB00C2C164 /* RouterX.h in Headers */ = {isa = PBXBuildFile; fileRef = C47B8A4D1C7B4EE000C2C164 /* RouterX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C492D3D91C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
+		C492D3DA1C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
+		C492D3DB1C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
 		C4F19A041C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
 		C4F19A051C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
 		C4F19A061C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
@@ -86,6 +89,7 @@
 		C47B8A991C7B550200C2C164 /* RouterXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47B8AAC1C7B554900C2C164 /* RouterX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47B8AB51C7B554900C2C164 /* RouterXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C492D3D81C80532700286FDB /* RouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternParserTests.swift; sourceTree = "<group>"; };
 		C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingGraphTests.swift; sourceTree = "<group>"; };
 		C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathScannerTests.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */,
 				C4F19A071C7E1A290073DC5D /* RoutingGraphTests.swift */,
 				C4F19A0B1C7F3ED40073DC5D /* URIPathScannerTests.swift */,
+				C492D3D81C80532700286FDB /* RouterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C492D3D91C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A081C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A041C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
 				C4F19A0C1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,
@@ -482,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C492D3DA1C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A091C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A051C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
 				C4F19A0D1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,
@@ -506,6 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C492D3DB1C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A0A1C7E1A290073DC5D /* RoutingGraphTests.swift in Sources */,
 				C4F19A061C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
 				C4F19A0E1C7F3ED40073DC5D /* URIPathScannerTests.swift in Sources */,

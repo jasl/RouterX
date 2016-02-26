@@ -3,37 +3,38 @@
 import Foundation
 import RouterX
 
-let handler: RouteVertex.HandlerType = { _ in
-    print("terminal")
+let pattern1 = "/articles(/page/:page(/per_page/:per_page))(/sort/:sort)(.:format)"
+let pattern2 = "/articles/new"
+let pattern3 = "/articles/:id"
+let pattern4 = "/:article_id"
+
+let router = Router()
+
+try! router.registerRoutingPattern(pattern1) { parameters in
+    print("call articles")
+    print(parameters)
 }
 
-let expr1 = "/articles(/page/:page(/per_page/:per_page))(/sort/:sort)(.:format)"
-let tokens1 = RoutingPatternScanner.tokenize(expr1)
-print(tokens1)
+try! router.registerRoutingPattern(pattern2) { _ in
+    print("call new article")
+}
 
-let expr2 = "/articles/new"
-let tokens2 = RoutingPatternScanner.tokenize(expr2)
-print(tokens2)
+let path1 = "/articles/page/2/sort/recent.json"
 
-let expr3 = "/articles/:id"
-let tokens3 = RoutingPatternScanner.tokenize(expr3)
-print(tokens3)
+switch router.matchRoute(path1) {
+case let .Matched(parameters, handler, pattern):
+    print("Matched pattern \(pattern)")
+    handler(parameters)
+case .UnMatched:
+    print("Unmatched")
+}
 
-let expr4 = "/:article_id"
-let tokens4 = RoutingPatternScanner.tokenize(expr4)
-print(tokens4)
+let path2 = "/articles/2/edit"
 
-let rootRoute = RouteVertex(pattern: "")
-
-try! RoutingPatternParser.parseAndAppendTo(rootRoute, routingPatternTokens: tokens1, terminalHandler: handler)
-try! RoutingPatternParser.parseAndAppendTo(rootRoute, routingPatternTokens: tokens2, terminalHandler: handler)
-try! RoutingPatternParser.parseAndAppendTo(rootRoute, routingPatternTokens: tokens3, terminalHandler: handler)
-try! RoutingPatternParser.parseAndAppendTo(rootRoute, routingPatternTokens: tokens4, terminalHandler: handler)
-
-print(rootRoute)
-
-let path = "/articles/page/2/sort/recent.json"
-
-let matchedRoute = matchRouteByURIPath(path, rootRoute: rootRoute)
-
-print(matchedRoute)
+switch router.matchRoute(path2) {
+case let .Matched(parameters, handler, pattern):
+    print("Matched pattern \(pattern)")
+    handler(parameters)
+case .UnMatched:
+    print("Unmatched")
+}
