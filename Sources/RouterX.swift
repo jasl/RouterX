@@ -2,6 +2,11 @@ import Foundation
 
 public typealias RouteTerminalHandlerType = ([String:String] -> Void)
 
+public enum RouteMatchingResult {
+    case Matched(parameters: [String:String], handler: RouteTerminalHandlerType, pattern: String)
+    case UnMatched
+}
+
 public class Router {
     private let rootRoute: RouteVertex
 
