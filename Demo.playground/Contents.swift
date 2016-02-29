@@ -22,9 +22,9 @@ try! router.registerRoutingPattern(pattern2) { _ in
 let path1 = "/articles/page/2/sort/recent.json"
 
 switch router.matchRoute(path1) {
-case let .Matched(parameters, handler, pattern):
-    print("Matched pattern \(pattern)")
-    handler(parameters)
+case let .Matched(matchedRoute):
+    print("Matched pattern \(matchedRoute.pattern)")
+    matchedRoute.doHandler()
 case .UnMatched:
     print("Unmatched")
 }
@@ -32,9 +32,9 @@ case .UnMatched:
 let path2 = "/articles/2/edit"
 
 switch router.matchRoute(path2) {
-case let .Matched(parameters, handler, pattern):
-    print("Matched pattern \(pattern)")
-    handler(parameters)
+case let .Matched(matchedRoute):
+    print("Matched pattern \(matchedRoute.pattern)")
+    matchedRoute.doHandler()
 case .UnMatched:
     print("Unmatched")
 }

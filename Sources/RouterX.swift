@@ -2,8 +2,24 @@ import Foundation
 
 public typealias RouteTerminalHandlerType = ([String:String] -> Void)
 
+public struct MatchedRoute {
+    public let parametars: [String: String]
+    public let pattern: String
+    private let handler: RouteTerminalHandlerType
+
+    public init(parameters: [String: String], pattern: String, handler: RouteTerminalHandlerType) {
+        self.pattern = pattern
+        self.parametars = parameters
+        self.handler = handler
+    }
+
+    public func doHandler() {
+        self.handler(self.parametars)
+    }
+}
+
 public enum RouteMatchingResult {
-    case Matched(parameters: [String:String], handler: RouteTerminalHandlerType, pattern: String)
+    case Matched(MatchedRoute)
     case UnMatched
 }
 
@@ -50,6 +66,7 @@ public class Router {
             }
         }
 
-        return .Matched(parameters: parameters, handler: targetRoute.handler!, pattern: targetRoute.pattern)
+        let matchedRoute = MatchedRoute(parameters: parameters, pattern: targetRoute.pattern, handler: targetRoute.handler!)
+        return .Matched(matchedRoute)
     }
 }

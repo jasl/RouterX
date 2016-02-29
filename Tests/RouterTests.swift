@@ -31,8 +31,8 @@ class RouterTests: XCTestCase {
         try! router.registerRoutingPattern(pattern1, handler: pattern1Handler)
 
         switch router.matchRoute(pattern1Case) {
-        case let .Matched(parameters, handler, _):
-            handler(parameters)
+        case let .Matched(matchedRoute):
+            matchedRoute.doHandler()
             XCTAssertTrue(isPattern1HandlerPerformed)
         case .UnMatched:
             XCTFail("A should matched case but not matched")
@@ -41,7 +41,7 @@ class RouterTests: XCTestCase {
         let unmatchedCase = "/articles/2/edit"
 
         switch router.matchRoute(unmatchedCase) {
-        case .Matched(_, _, _):
+        case .Matched(_):
             XCTFail("A shouldn't matched case but matched")
         case .UnMatched:
             break
