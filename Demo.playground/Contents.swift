@@ -11,8 +11,7 @@ let pattern4 = "/:article_id"
 let router = Router()
 
 try! router.registerRoutingPattern(pattern1) { parameters in
-    print("call articles")
-    print(parameters)
+    print("articles pattern handler, parameter is \(parameters).")
 }
 
 try! router.registerRoutingPattern(pattern2) { _ in
@@ -21,20 +20,11 @@ try! router.registerRoutingPattern(pattern2) { _ in
 
 let path1 = "/articles/page/2/sort/recent.json"
 
-switch router.matchRoute(path1) {
-case let .Matched(matchedRoute):
-    print("Matched pattern \(matchedRoute.pattern)")
-    matchedRoute.doHandler()
-case .UnMatched:
-    print("Unmatched")
-}
+router.matchRoute(path1)
 
 let path2 = "/articles/2/edit"
-
-switch router.matchRoute(path2) {
-case let .Matched(matchedRoute):
-    print("Matched pattern \(matchedRoute.pattern)")
-    matchedRoute.doHandler()
-case .UnMatched:
-    print("Unmatched")
+let path2UnmatchHandler = { (uriPath: String) in
+    print("\(uriPath) is unmatched.")
 }
+
+router.matchRoute(path2, unmatchHandler: path2UnmatchHandler)

@@ -1,33 +1,20 @@
 import Foundation
 
 public typealias RouteTerminalHandlerType = ([String:String] -> Void)
-
-public struct MatchedRoute {
-    public let parametars: [String: String]
-    public let pattern: String
-    private let handler: RouteTerminalHandlerType
-
-    public init(parameters: [String: String], pattern: String, handler: RouteTerminalHandlerType) {
-        self.pattern = pattern
-        self.parametars = parameters
-        self.handler = handler
-    }
-
-    public func doHandler() {
-        self.handler(self.parametars)
-    }
-}
-
-public enum RouteMatchingResult {
-    case Matched(MatchedRoute)
-    case UnMatched
-}
+public typealias RouteUnmatchHandlerType = ((String) -> ())
 
 public class Router {
     private let rootRoute: RouteVertex
+    private let defaultUnmatchHandler: RouteUnmatchHandlerType
 
-    public init() {
+    public init(defaultUnmatchHandler: RouteUnmatchHandlerType? = nil) {
         self.rootRoute = RouteVertex(pattern: "")
+
+        if let unmatchHandler = defaultUnmatchHandler {
+            self.defaultUnmatchHandler = unmatchHandler
+        } else {
+            self.defaultUnmatchHandler = { _ in }
+        }
     }
 
     public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandlerType) throws {
@@ -36,11 +23,16 @@ public class Router {
         try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, terminalHandler: handler)
     }
 
-    public func matchRoute(uriPath: String) -> RouteMatchingResult {
+    public func matchRoute(uriPath: String, unmatchHandler: RouteUnmatchHandlerType? = nil) {
         let tokens = URIPathScanner.tokenize(uriPath)
 
         if tokens.isEmpty {
-            return .UnMatched
+            if let handler = unmatchHandler {
+                handler(uriPath)
+            } else {
+                self.defaultUnmatchHandler(uriPath)
+            }
+            return
         }
 
         var tokensGenerator = tokens.generate()
@@ -49,12 +41,22 @@ public class Router {
             if let currentRoute = targetRoute.toNextVertex(token.routeEdge) {
                 targetRoute = currentRoute
             } else {
-                return .UnMatched
+                if let handler = unmatchHandler {
+                    handler(uriPath)
+                } else {
+                    self.defaultUnmatchHandler(uriPath)
+                }
+                return
             }
         }
 
-        guard targetRoute.isTerminal else {
-            return .UnMatched
+        guard let terminalHandler = targetRoute.handler else {
+            if let handler = unmatchHandler {
+                handler(uriPath)
+            } else {
+                self.defaultUnmatchHandler(uriPath)
+            }
+            return
         }
 
         var parameters: [String: String] = [:]
@@ -66,7 +68,6 @@ public class Router {
             }
         }
 
-        let matchedRoute = MatchedRoute(parameters: parameters, pattern: targetRoute.pattern, handler: targetRoute.handler!)
-        return .Matched(matchedRoute)
+        terminalHandler(parameters)
     }
 }
