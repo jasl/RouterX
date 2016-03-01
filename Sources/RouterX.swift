@@ -23,7 +23,7 @@ public class Router {
         try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, terminalHandler: handler)
     }
 
-    public func matchRoute(uriPath: String, unmatchHandler: RouteUnmatchHandlerType? = nil) {
+    public func matchRouteAndDoHandler(uriPath: String, unmatchHandler: RouteUnmatchHandlerType? = nil) {
         let tokens = URIPathScanner.tokenize(uriPath)
 
         if tokens.isEmpty {

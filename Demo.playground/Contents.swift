@@ -20,11 +20,11 @@ try! router.registerRoutingPattern(pattern2) { _ in
 
 let path1 = "/articles/page/2/sort/recent.json"
 
-router.matchRoute(path1)
+router.matchRouteAndDoHandler(path1)
 
 let path2 = "/articles/2/edit"
 let path2UnmatchHandler = { (uriPath: String) in
     print("\(uriPath) is unmatched.")
 }
 
-router.matchRoute(path2, unmatchHandler: path2UnmatchHandler)
+router.matchRouteAndDoHandler(path2, unmatchHandler: path2UnmatchHandler)
