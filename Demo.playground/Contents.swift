@@ -16,7 +16,7 @@ let pattern4 = "/:article_id"
 let defaultUnmatchHandler = { (uriPath: String, context: AnyObject?) in
   // Do something here, e.g: give some tips or show a default UI
   print("\(uriPath) is unmatched.")
-  
+
   // context can be provided on matching patterns
   if let context = context as? String {
     print("Context is \"\(context)\"")
@@ -32,7 +32,7 @@ let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 router.registerRoutingPattern(pattern1) { (parameters, context) in
   // Do something here, e.g: show a UI
   print("articles pattern handler, parameter is \(parameters).")
-  
+
   // context can be provided on matching patterns
   if let context = context as? String {
     print("Context is \"\(context)\"")
@@ -59,7 +59,7 @@ let path2 = "/articles/2/edit"
 
 let customUnmatchHandler = { (uriPath: String, context: AnyObject?) in
   print("No match...")
-  
+
   // context can be provided on matching patterns
   if let context = context as? String {
     print("Context is \"\(context)\"")
@@ -70,4 +70,3 @@ router.matchAndDoHandler(path2)
 
 // It can provide a custome unmatch handler to override the default, also can pass the context
 router.matchAndDoHandler(path2, context: "bar", unmatchHandler: customUnmatchHandler)
-
