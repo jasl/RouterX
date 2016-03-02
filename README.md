@@ -10,7 +10,9 @@ A Ruby on Rails flavored URI routing library in Swift.
 
 ## Usages
 
-You could learn basic usages through [Demo.playground](Demo.playground/Contents.swift) for now.
+See [Demo.playground](Demo.playground/Contents.swift) for now.
+
+Routing rules follows Rails flavor, see [Rails routing guide](http://guides.rubyonrails.org/routing.html#non-resourceful-routes) for now.
 
 ## Requirements
 
