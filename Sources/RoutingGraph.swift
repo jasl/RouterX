@@ -39,8 +39,6 @@ public class RouteVertex {
     private static let stopWordsSet: Set<Character> = [".", "/"]
     private static let placeholderPrefixsSet: Set<Character> = [":", "*"]
 
-    public typealias HandlerType = ([String:String] -> Void)
-
     public private(set) var pattern: String
     public private(set) lazy var placeholderMappings: [String: Int] = {
         var placeholderMappings: [String: Int] = [:]
@@ -58,9 +56,9 @@ public class RouteVertex {
     }()
 
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
-    public var handler: HandlerType?
+    public var handler: RouteTerminalHandlerType?
 
-    public init(pattern: String, handler: HandlerType? = nil) {
+    public init(pattern: String, handler: RouteTerminalHandlerType? = nil) {
         self.pattern = pattern
         self.handler = handler
     }

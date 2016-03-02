@@ -1,7 +1,7 @@
 import Foundation
 
-public typealias RouteTerminalHandlerType = ([String:String] -> Void)
-public typealias RouteUnmatchHandlerType = ((String) -> ())
+public typealias RouteTerminalHandlerType = (([String:String], context: AnyObject?) -> Void)
+public typealias RouteUnmatchHandlerType = ((String, context: AnyObject?) -> ())
 
 public struct MatchedRoute {
     public let parametars: [String: String]
@@ -14,8 +14,8 @@ public struct MatchedRoute {
         self.handler = handler
     }
 
-    public func doHandler() {
-        self.handler(self.parametars)
+    public func doHandler(context: AnyObject? = nil) {
+        self.handler(self.parametars, context: context)
     }
 }
 
@@ -29,7 +29,7 @@ public class Router {
         if let unmatchHandler = defaultUnmatchHandler {
             self.defaultUnmatchHandler = unmatchHandler
         } else {
-            self.defaultUnmatchHandler = { _ in }
+            self.defaultUnmatchHandler = { (_, _) in }
         }
     }
 
@@ -45,21 +45,23 @@ public class Router {
         }
     }
 
-    public func matchAndDoHandler(uriPath: String, unmatchHandler: RouteUnmatchHandlerType? = nil) {
+    public func matchAndDoHandler(uriPath: String, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandlerType? = nil) -> Bool {
         guard let matchedRoute = self.match(uriPath) else {
             if let handler = unmatchHandler {
-                handler(uriPath)
+                handler(uriPath, context: context)
             } else {
-                self.defaultUnmatchHandler(uriPath)
+                self.defaultUnmatchHandler(uriPath, context: context)
             }
 
-            return
+            return false
         }
 
-        matchedRoute.doHandler()
+        matchedRoute.doHandler(context)
+
+        return true
     }
 
-    private func match(uriPath: String) -> MatchedRoute? {
+    public func match(uriPath: String) -> MatchedRoute? {
         let tokens = URIPathScanner.tokenize(uriPath)
 
         if tokens.isEmpty {

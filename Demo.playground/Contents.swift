@@ -13,9 +13,14 @@ let pattern4 = "/:article_id"
 //: Initialize the router, I can give a default closure to handle while given a URI path but match no one.
 
 // This is the handler that would be performed after no pattern match
-let defaultUnmatchHandler = { (uriPath: String) in
+let defaultUnmatchHandler = { (uriPath: String, context: AnyObject?) in
   // Do something here, e.g: give some tips or show a default UI
   print("\(uriPath) is unmatched.")
+  
+  // context can be provided on matching patterns
+  if let context = context as? String {
+    print("Context is \"\(context)\"")
+  }
 }
 
 // Initialize a router instance, consider it's global and singleton
@@ -24,9 +29,14 @@ let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 //: Register patterns, the closure is the handle when matched the pattern.
 
 // Set a route pattern, the closure is a handler that would be performed after match the pattern
-router.registerRoutingPattern(pattern1) { parameters in
+router.registerRoutingPattern(pattern1) { (parameters, context) in
   // Do something here, e.g: show a UI
   print("articles pattern handler, parameter is \(parameters).")
+  
+  // context can be provided on matching patterns
+  if let context = context as? String {
+    print("Context is \"\(context)\"")
+  }
 }
 
 router.registerRoutingPattern(pattern2) { _ in
@@ -41,15 +51,23 @@ let path1 = "/articles/page/2/sort/recent.json"
 
 // It's will be matched, and perform the handler that we have set up.
 router.matchAndDoHandler(path1)
+// It can pass the context for handler
+router.matchAndDoHandler(path1, context: "fooo")
 
 // A case that shouldn't be matched
 let path2 = "/articles/2/edit"
 
-let customUnmatchHandler = { (uriPath: String) in
-  print("no match...")
+let customUnmatchHandler = { (uriPath: String, context: AnyObject?) in
+  print("No match...")
+  
+  // context can be provided on matching patterns
+  if let context = context as? String {
+    print("Context is \"\(context)\"")
+  }
 }
 // It's will not be matched, and perform the default unmatch handler that we have set up
 router.matchAndDoHandler(path2)
 
-// It can provide a custome unmatch handler to override the default
-router.matchAndDoHandler(path2, unmatchHandler: customUnmatchHandler)
+// It can provide a custome unmatch handler to override the default, also can pass the context
+router.matchAndDoHandler(path2, context: "bar", unmatchHandler: customUnmatchHandler)
+
