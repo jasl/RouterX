@@ -28,7 +28,7 @@ class RouterTests: XCTestCase {
             XCTAssertEqual(parameters["sort"], "recent")
         }
 
-        try! router.registerRoutingPattern(pattern1, handler: pattern1Handler)
+        router.registerRoutingPattern(pattern1, handler: pattern1Handler)
 
         router.matchAndDoHandler(pattern1Case)
         XCTAssertTrue(isPattern1HandlerPerformed)

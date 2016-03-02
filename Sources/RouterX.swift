@@ -33,10 +33,16 @@ public class Router {
         }
     }
 
-    public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandlerType) throws {
+    public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandlerType) -> Bool {
         let tokens = RoutingPatternScanner.tokenize(pattern)
 
-        try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, terminalHandler: handler)
+        do {
+            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, terminalHandler: handler)
+
+            return true
+        } catch {
+            return false
+        }
     }
 
     public func matchAndDoHandler(uriPath: String, unmatchHandler: RouteUnmatchHandlerType? = nil) {

@@ -14,11 +14,11 @@ let defaultUnmatchHandler = { (uriPath: String) in
 
 let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 
-try! router.registerRoutingPattern(pattern1) { parameters in
+router.registerRoutingPattern(pattern1) { parameters in
     print("articles pattern handler, parameter is \(parameters).")
 }
 
-try! router.registerRoutingPattern(pattern2) { _ in
+router.registerRoutingPattern(pattern2) { _ in
     print("call new article")
 }
 
