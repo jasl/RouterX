@@ -8,7 +8,11 @@ let pattern2 = "/articles/new"
 let pattern3 = "/articles/:id"
 let pattern4 = "/:article_id"
 
-let router = Router()
+let defaultUnmatchHandler = { (uriPath: String) in
+  print("\(uriPath) is unmatched.")
+}
+
+let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 
 try! router.registerRoutingPattern(pattern1) { parameters in
     print("articles pattern handler, parameter is \(parameters).")
@@ -20,11 +24,12 @@ try! router.registerRoutingPattern(pattern2) { _ in
 
 let path1 = "/articles/page/2/sort/recent.json"
 
-router.matchRouteAndDoHandler(path1)
+router.matchAndDoHandler(path1)
 
 let path2 = "/articles/2/edit"
-let path2UnmatchHandler = { (uriPath: String) in
-    print("\(uriPath) is unmatched.")
-}
 
-router.matchRouteAndDoHandler(path2, unmatchHandler: path2UnmatchHandler)
+let customUnmatchHandler = { (uriPath: String) in
+    print("no match...")
+}
+router.matchAndDoHandler(path2, unmatchHandler: customUnmatchHandler)
+router.matchAndDoHandler(path2)
