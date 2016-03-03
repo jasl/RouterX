@@ -3,6 +3,7 @@ RouterX
 
 [![Build Status](https://travis-ci.org/jasl/RouterX.svg)](https://travis-ci.org/jasl/RouterX)
 [![codecov.io](https://codecov.io/github/jasl/RouterX/coverage.svg?branch=master)](https://codecov.io/github/jasl/RouterX?branch=master)
+[![Code Climate](https://codeclimate.com/github/jasl/RouterX/badges/gpa.svg)](https://codeclimate.com/github/jasl/RouterX)
 
 A Ruby on Rails flavored URI routing library in Swift.
 
