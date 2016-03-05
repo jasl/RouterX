@@ -36,7 +36,7 @@ public class RoutingPatternParser {
     }
 
     private func parseLParen(context: RouteVertex, isFirstEnter: Bool = true, var generator: RoutingPatternTokenGenerator) throws {
-        if isFirstEnter && !context.isFinish {
+        if isFirstEnter && !context.isFinale {
             throw RoutingPatternParserError.AmbiguousOptionalPattern
         }
 
@@ -84,13 +84,11 @@ public class RoutingPatternParser {
     }
 
     private func parseSlash(context: RouteVertex, var generator: RoutingPatternTokenGenerator) throws {
-        let pattern = context.pattern + "/"
-
         guard let nextToken = generator.next() else {
             if let terminalRoute = context.nextRoutes[.Slash] {
                 assignTerminalHandlerIfNil(terminalRoute)
             } else {
-                context.nextRoutes[.Slash] = RouteVertex(pattern: pattern, handler: self.terminalHandler)
+                context.nextRoutes[.Slash] = RouteVertex(handler: self.terminalHandler)
             }
 
             return
@@ -100,7 +98,7 @@ public class RoutingPatternParser {
         if let route = context.nextRoutes[.Slash] {
             nextRoute = route
         } else {
-            nextRoute = RouteVertex(pattern: pattern)
+            nextRoute = RouteVertex()
             context.nextRoutes[.Slash] = nextRoute
         }
 
@@ -119,8 +117,6 @@ public class RoutingPatternParser {
     }
 
     private func parseDot(context: RouteVertex, var generator: RoutingPatternTokenGenerator) throws {
-        let pattern = context.pattern + "."
-
         guard let nextToken = generator.next() else {
             throw RoutingPatternParserError.UnexpectToken(got: nil, message: "Expect a token after \".\"")
         }
@@ -129,7 +125,7 @@ public class RoutingPatternParser {
         if let route = context.nextRoutes[.Dot] {
             nextRoute = route
         } else {
-            nextRoute = RouteVertex(pattern: pattern)
+            nextRoute = RouteVertex()
             context.nextRoutes[.Dot] = nextRoute
         }
 
@@ -144,13 +140,11 @@ public class RoutingPatternParser {
     }
 
     private func parseLiteral(context: RouteVertex, value: String, var generator: RoutingPatternTokenGenerator) throws {
-        let pattern = context.pattern + value
-
         guard let nextToken = generator.next() else {
             if let terminalRoute = context.nextRoutes[.Literal(value)] {
                 assignTerminalHandlerIfNil(terminalRoute)
             } else {
-                context.nextRoutes[.Literal(value)] = RouteVertex(pattern: pattern, handler: self.terminalHandler)
+                context.nextRoutes[.Literal(value)] = RouteVertex(handler: self.terminalHandler)
             }
 
             return
@@ -160,7 +154,7 @@ public class RoutingPatternParser {
         if let route = context.nextRoutes[.Literal(value)] {
             nextRoute = route
         } else {
-            nextRoute = RouteVertex(pattern: pattern)
+            nextRoute = RouteVertex()
             context.nextRoutes[.Literal(value)] = nextRoute
         }
 
@@ -177,13 +171,11 @@ public class RoutingPatternParser {
     }
 
     private func parseSymbol(context: RouteVertex, value: String, var generator: RoutingPatternTokenGenerator) throws {
-        let pattern = context.pattern + ":\(value)"
-
         guard let nextToken = generator.next() else {
             if let terminalRoute = context.epsilonRoute?.1 {
                 assignTerminalHandlerIfNil(terminalRoute)
             } else {
-                context.epsilonRoute = (value, RouteVertex(pattern: pattern, handler: terminalHandler))
+                context.epsilonRoute = (value, RouteVertex(handler: terminalHandler))
             }
 
             return
@@ -193,7 +185,7 @@ public class RoutingPatternParser {
         if let route = context.epsilonRoute?.1 {
             nextRoute = route
         } else {
-            nextRoute = RouteVertex(pattern: pattern)
+            nextRoute = RouteVertex()
             context.epsilonRoute = (value, nextRoute)
         }
 
@@ -210,8 +202,6 @@ public class RoutingPatternParser {
     }
 
     private func parseStar(context: RouteVertex, value: String, var generator: RoutingPatternTokenGenerator) throws {
-        let pattern = context.pattern + "*\(value)"
-
         if let nextToken = generator.next() {
             throw RoutingPatternParserError.UnexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
         }
@@ -219,7 +209,7 @@ public class RoutingPatternParser {
         if let terminalRoute = context.epsilonRoute?.1 {
             assignTerminalHandlerIfNil(terminalRoute)
         } else {
-            context.epsilonRoute = (value, RouteVertex(pattern: pattern, handler: terminalHandler))
+            context.epsilonRoute = (value, RouteVertex(handler: terminalHandler))
         }
     }
 

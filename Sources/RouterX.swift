@@ -22,7 +22,7 @@ public class Router {
     private let defaultUnmatchHandler: RouteUnmatchHandlerType
 
     public init(defaultUnmatchHandler: RouteUnmatchHandlerType? = nil) {
-        self.rootRoute = RouteVertex(pattern: "")
+        self.rootRoute = RouteVertex()
 
         if let unmatchHandler = defaultUnmatchHandler {
             self.defaultUnmatchHandler = unmatchHandler
