@@ -180,21 +180,21 @@ public class RoutingPatternParser {
         let pattern = context.pattern + ":\(value)"
 
         guard let nextToken = generator.next() else {
-            if let terminalRoute = context.nextRoutes[.Any] {
+            if let terminalRoute = context.epsilonRoute?.1 {
                 assignTerminalHandlerIfNil(terminalRoute)
             } else {
-                context.nextRoutes[.Any] = RouteVertex(pattern: pattern, handler: terminalHandler)
+                context.epsilonRoute = (value, RouteVertex(pattern: pattern, handler: terminalHandler))
             }
 
             return
         }
 
         var nextRoute: RouteVertex!
-        if let route = context.nextRoutes[.Any] {
+        if let route = context.epsilonRoute?.1 {
             nextRoute = route
         } else {
             nextRoute = RouteVertex(pattern: pattern)
-            context.nextRoutes[.Any] = nextRoute
+            context.epsilonRoute = (value, nextRoute)
         }
 
         switch nextToken {
@@ -216,10 +216,10 @@ public class RoutingPatternParser {
             throw RoutingPatternParserError.UnexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
         }
 
-        if let terminalRoute = context.nextRoutes[.Any] {
+        if let terminalRoute = context.epsilonRoute?.1 {
             assignTerminalHandlerIfNil(terminalRoute)
         } else {
-            context.nextRoutes[.Any] = RouteVertex(pattern: pattern, handler: terminalHandler)
+            context.epsilonRoute = (value, RouteVertex(pattern: pattern, handler: terminalHandler))
         }
     }
 
@@ -231,6 +231,10 @@ public class RoutingPatternParser {
         }
 
         for ctx in context.nextRoutes.values {
+            contexts.appendContentsOf(contextTerminals(ctx))
+        }
+
+        if let ctx = context.epsilonRoute?.1 {
             contexts.appendContentsOf(contextTerminals(ctx))
         }
 

@@ -53,26 +53,25 @@ public class Router {
             return nil
         }
 
+        var parameters: [String: String] = [:]
+
         var tokensGenerator = tokens.generate()
         var targetRoute: RouteVertex = rootRoute
         while let token = tokensGenerator.next() {
-            guard let currentRoute = targetRoute.toNextVertex(token.routeEdge) else {
+            if let determinativeRoute = targetRoute.nextRoutes[token.routeEdge] {
+                targetRoute = determinativeRoute
+            } else if let epsilonRoute = targetRoute.epsilonRoute {
+                targetRoute = epsilonRoute.1
+                parameters[epsilonRoute.0] = String(token).stringByRemovingPercentEncoding ?? ""
+            } else {
                 return nil
             }
-
-            targetRoute = currentRoute
         }
 
         guard let handler = targetRoute.handler else {
             return nil
         }
 
-        var parameters: [String: String] = [:]
-        for (k, i) in targetRoute.placeholderMappings {
-            if case .Literal(let value) = tokens[i] {
-                parameters[k] = value
-            }
-        }
         parameters.unionInPlace(url.queryDictionary)
 
         return MatchedRoute(parameters: parameters, handler: handler)

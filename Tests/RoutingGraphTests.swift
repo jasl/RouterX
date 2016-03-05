@@ -39,11 +39,9 @@ class RoutingGraphTests: XCTestCase {
 
         XCTAssertNil(route.toNextVertex(.Literal("blog")))
 
-        route.nextRoutes[.Any] = RouteVertex(pattern: "any")
+        route.epsilonRoute = ("any", RouteVertex(pattern: "any"))
 
-        XCTAssertEqual(route.toNextVertex(.Literal("blog"))?.pattern, "any", "Given a non-existing Literal edge should go .Any edge if it's available.")
+        XCTAssertEqual(route.toNextVertex(.Literal("blog"))?.pattern, "any", "Given a non-existing Literal edge should go epsilon edge if it's available.")
         XCTAssertEqual(route.toNextVertex(.Literal("articles"))?.pattern, "articles")
-
-        XCTAssertNil(route.toNextVertex(.Any), "Edge .Any should not be reached directly.")
     }
 }

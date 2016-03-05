@@ -3,14 +3,19 @@ import Foundation
 public enum RouteEdge {
     case Dot
     case Slash
-
     case Literal(String)
-    case Any
 }
 
 extension RouteEdge: Equatable, Hashable, CustomDebugStringConvertible, CustomStringConvertible {
     public var hashValue: Int {
-        return self.description.hashValue
+        switch self {
+        case .Literal(let value):
+            return value.hashValue
+        case .Dot:
+            return ".".hashValue
+        case .Slash:
+            return "/".hashValue
+        }
     }
 
     public var description: String {
@@ -21,8 +26,6 @@ extension RouteEdge: Equatable, Hashable, CustomDebugStringConvertible, CustomSt
             return "."
         case .Slash:
             return "/"
-        case .Any:
-            return "*"
         }
     }
 
@@ -56,6 +59,7 @@ public class RouteVertex {
     }()
 
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
+    public var epsilonRoute: (String, RouteVertex)?
     public var handler: RouteTerminalHandlerType?
 
     public init(pattern: String, handler: RouteTerminalHandlerType? = nil) {
@@ -77,10 +81,8 @@ public class RouteVertex {
             return self.nextRoutes[.Slash]
         case .Dot:
             return self.nextRoutes[.Dot]
-        case .Literal(let value):
-            return self.nextRoutes[.Literal(value)] ?? self.nextRoutes[.Any]
         default:
-            return nil
+            return self.nextRoutes[token] ?? self.epsilonRoute?.1
         }
     }
 }
@@ -129,8 +131,12 @@ extension RouteVertex: CustomDebugStringConvertible {
             string += ">\n"
         }
 
-        for v in nextRoutes.values {
+        for v in self.nextRoutes.values {
             string += v.debugDescription
+        }
+
+        if let e = self.epsilonRoute?.1 {
+            string += e.debugDescription
         }
 
         return string
