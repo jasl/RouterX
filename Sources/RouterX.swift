@@ -74,8 +74,6 @@ public class Router {
             return nil
         }
 
-        parameters.unionInPlace(url.queryDictionary)
-
         return MatchedRoute(url: url, parameters: parameters, handler: handler)
     }
 

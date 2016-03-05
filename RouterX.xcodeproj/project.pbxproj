@@ -8,16 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		231DF0DBB8E7681089400608 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
-		231DF193B6093441954773A2 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DF0C280958FB0F64F146D /* Dictionary.swift */; };
-		231DF2FB6BF91D286E99F170 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DF0C280958FB0F64F146D /* Dictionary.swift */; };
-		231DF5B757164FC467B9C54D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DF0C280958FB0F64F146D /* Dictionary.swift */; };
-		231DF60E95A237FE5EB86D3B /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFC2A7082ECE8B8C1B928 /* NSURL.swift */; };
 		231DF6D69AF6E590A37DC0F7 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
 		231DF6E7002232B3CC6174AF /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
 		231DF73938F4296E01305770 /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
-		231DF9F392258C2589B40E9F /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFC2A7082ECE8B8C1B928 /* NSURL.swift */; };
 		231DFBBE6989F770CA952A66 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
-		231DFCD47DC28E19F6C87B67 /* NSURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFC2A7082ECE8B8C1B928 /* NSURL.swift */; };
 		231DFE1FAA835F5B88ACAA38 /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
 		C418DEDB1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */; };
 		C418DEDC1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */; };
@@ -82,9 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		231DF0C280958FB0F64F146D /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		231DF29F841315C3D4F0B2D0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		231DFC2A7082ECE8B8C1B928 /* NSURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURL.swift; sourceTree = "<group>"; };
 		231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingGraph.swift; sourceTree = "<group>"; };
 		231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathToken.swift; sourceTree = "<group>"; };
 		C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternScanner.swift; sourceTree = "<group>"; };
@@ -156,15 +148,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		231DF6103121129D662CACEC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				231DFC2A7082ECE8B8C1B928 /* NSURL.swift */,
-				231DF0C280958FB0F64F146D /* Dictionary.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		231DF866E7F4C76CE38562B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				C47B8AC31C7B55E600C2C164 /* Supporting Files */,
-				231DF6103121129D662CACEC /* Extensions */,
 				C43094881C7C28D00038A0EC /* RoutingGraph.swift */,
 				C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */,
 				C418DEDA1C7D0A8000630170 /* RoutingPatternToken.swift */,
@@ -488,8 +470,6 @@
 				C43094871C7B842C0038A0EC /* RouterX.swift in Sources */,
 				231DF6E7002232B3CC6174AF /* URIPathToken.swift in Sources */,
 				C4E79A391C8B59F000EFA1DD /* URIPathScanner.swift in Sources */,
-				231DF9F392258C2589B40E9F /* NSURL.swift in Sources */,
-				231DF5B757164FC467B9C54D /* Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,8 +496,6 @@
 				C43094931C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */,
 				231DFE1FAA835F5B88ACAA38 /* URIPathToken.swift in Sources */,
 				C4E79A3A1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */,
-				231DFCD47DC28E19F6C87B67 /* NSURL.swift in Sources */,
-				231DF193B6093441954773A2 /* Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +522,6 @@
 				C43094941C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */,
 				231DF73938F4296E01305770 /* URIPathToken.swift in Sources */,
 				C4E79A3B1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */,
-				231DF60E95A237FE5EB86D3B /* NSURL.swift in Sources */,
-				231DF2FB6BF91D286E99F170 /* Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
