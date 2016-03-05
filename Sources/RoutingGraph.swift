@@ -32,9 +32,6 @@ public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
 }
 
 public class RouteVertex {
-    private static let stopWordsSet: Set<Character> = [".", "/"]
-    private static let placeholderPrefixsSet: Set<Character> = [":", "*"]
-
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
     public var epsilonRoute: (String, RouteVertex)?
     public var handler: RouteTerminalHandlerType?

@@ -1,19 +1,21 @@
 import Foundation
 
-public typealias RouteTerminalHandlerType = (([String:String], context: AnyObject?) -> Void)
+public typealias RouteTerminalHandlerType = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
 public typealias RouteUnmatchHandlerType = ((NSURL, context: AnyObject?) -> ())
 
 public struct MatchedRoute {
+    public let url: NSURL
     public let parametars: [String: String]
     private let handler: RouteTerminalHandlerType
 
-    public init(parameters: [String: String], handler: RouteTerminalHandlerType) {
+    public init(url: NSURL, parameters: [String: String], handler: RouteTerminalHandlerType) {
+        self.url = url
         self.parametars = parameters
         self.handler = handler
     }
 
     public func doHandler(context: AnyObject? = nil) {
-        self.handler(self.parametars, context: context)
+        self.handler(self.url, parameters: self.parametars, context: context)
     }
 }
 
@@ -74,7 +76,7 @@ public class Router {
 
         parameters.unionInPlace(url.queryDictionary)
 
-        return MatchedRoute(parameters: parameters, handler: handler)
+        return MatchedRoute(url: url, parameters: parameters, handler: handler)
     }
 
     public func matchURLPath(urlPath: String) -> MatchedRoute? {

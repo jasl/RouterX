@@ -29,14 +29,13 @@ let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
 //: Register patterns, the closure is the handle when matched the pattern.
 
 // Set a route pattern, the closure is a handler that would be performed after match the pattern
-router.registerRoutingPattern(pattern1) { (parameters, context) in
+router.registerRoutingPattern(pattern1) { (url, parameters, context) in
   // Do something here, e.g: show a UI
-  print("articles pattern handler, parameter is \(parameters).")
-
-  // context can be provided on matching patterns
+  var string = "URL is \(url), parameter is \(parameters)"
   if let context = context as? String {
-    print("Context is \"\(context)\"")
+    string += " Context is \"\(context)\""
   }
+  print(string)
 }
 
 router.registerRoutingPattern(pattern2) { _ in
