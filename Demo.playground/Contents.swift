@@ -57,12 +57,13 @@ router.matchURLPathAndDoHandler(path1, context: "fooo")
 let path2 = "/articles/2/edit"
 
 let customUnmatchHandler: RouteUnmatchHandlerType = { (url, context) in
-  print("No match...")
-
+  var string = "\(url) is no match..."
   // context can be provided on matching patterns
   if let context = context as? String {
-    print("Context is \"\(context)\"")
+    string += "Context is \"\(context)\""
   }
+
+  print(string)
 }
 // It's will not be matched, and perform the default unmatch handler that we have set up
 router.matchURLPathAndDoHandler(path2)
