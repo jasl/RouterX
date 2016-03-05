@@ -15,6 +15,17 @@ public enum URIPathToken {
             return .Literal(value)
         }
     }
+
+    init(byComponent component: String) {
+        switch component {
+        case "/":
+            self = .Slash
+        case ".":
+            self = .Dot
+        default:
+            self = .Literal(component)
+        }
+    }
 }
 
 extension URIPathToken: CustomStringConvertible, CustomDebugStringConvertible {

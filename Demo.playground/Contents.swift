@@ -13,9 +13,9 @@ let pattern4 = "/:article_id"
 //: Initialize the router, I can give a default closure to handle while given a URI path but match no one.
 
 // This is the handler that would be performed after no pattern match
-let defaultUnmatchHandler = { (uriPath: String, context: AnyObject?) in
+let defaultUnmatchHandler = { (url: NSURL, context: AnyObject?) in
   // Do something here, e.g: give some tips or show a default UI
-  print("\(uriPath) is unmatched.")
+  print("\(url) is unmatched.")
 
   // context can be provided on matching patterns
   if let context = context as? String {
@@ -47,17 +47,17 @@ router.registerRoutingPattern(pattern2) { _ in
 //: Let match some URI Path.
 
 // A case that should be matched
-let path1 = "/articles/page/2/sort/recent.json"
+let path1 = "/articles/page/2/sort/recent.json?foo=bar&baz"
 
 // It's will be matched, and perform the handler that we have set up.
-router.matchAndDoHandler(path1)
+router.matchURLPathAndDoHandler(path1)
 // It can pass the context for handler
-router.matchAndDoHandler(path1, context: "fooo")
+router.matchURLPathAndDoHandler(path1, context: "fooo")
 
 // A case that shouldn't be matched
 let path2 = "/articles/2/edit"
 
-let customUnmatchHandler = { (uriPath: String, context: AnyObject?) in
+let customUnmatchHandler: RouteUnmatchHandlerType = { (url, context) in
   print("No match...")
 
   // context can be provided on matching patterns
@@ -66,7 +66,7 @@ let customUnmatchHandler = { (uriPath: String, context: AnyObject?) in
   }
 }
 // It's will not be matched, and perform the default unmatch handler that we have set up
-router.matchAndDoHandler(path2)
+router.matchURLPathAndDoHandler(path2)
 
 // It can provide a custome unmatch handler to override the default, also can pass the context
-router.matchAndDoHandler(path2, context: "bar", unmatchHandler: customUnmatchHandler)
+router.matchURLPathAndDoHandler(path2, context: "bar", unmatchHandler: customUnmatchHandler)
