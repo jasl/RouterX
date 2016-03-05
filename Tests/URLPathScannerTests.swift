@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import RouterX
 
-class URIPathScannerTests: XCTestCase {
+class URLPathScannerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -13,7 +13,7 @@ class URIPathScannerTests: XCTestCase {
     }
 
     func testScanner() {
-        let cases: [String: Array<URIPathToken>] = [
+        let cases: [String: Array<URLPathToken>] = [
                 "/": [.Slash],
                 "//": [.Slash, .Slash],
                 "/page": [.Slash, .Literal("page")],
@@ -34,7 +34,7 @@ class URIPathScannerTests: XCTestCase {
         ]
 
         for (pattern, expect) in cases {
-            let tokens = URIPathScanner.tokenize(pattern)
+            let tokens = URLPathScanner.tokenize(pattern)
 
             XCTAssertEqual(tokens, expect)
         }

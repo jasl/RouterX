@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		231DF0DBB8E7681089400608 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
 		231DF6D69AF6E590A37DC0F7 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
-		231DF6E7002232B3CC6174AF /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
-		231DF73938F4296E01305770 /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
 		231DFBBE6989F770CA952A66 /* RoutingGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */; };
-		231DFE1FAA835F5B88ACAA38 /* URIPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */; };
 		C418DEDB1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */; };
 		C418DEDC1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */; };
 		C418DEDD1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */; };
@@ -40,12 +37,15 @@
 		C492D3D91C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
 		C492D3DA1C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
 		C492D3DB1C80532700286FDB /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D3D81C80532700286FDB /* RouterTests.swift */; };
-		C4E79A391C8B59F000EFA1DD /* URIPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A381C8B59F000EFA1DD /* URIPathScanner.swift */; };
-		C4E79A3A1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A381C8B59F000EFA1DD /* URIPathScanner.swift */; };
-		C4E79A3B1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A381C8B59F000EFA1DD /* URIPathScanner.swift */; };
-		C4E79A3E1C8B60AF00EFA1DD /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URIPathScannerTests.swift */; };
-		C4E79A3F1C8B60B000EFA1DD /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URIPathScannerTests.swift */; };
-		C4E79A401C8B60B000EFA1DD /* URIPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URIPathScannerTests.swift */; };
+		C4E79A3E1C8B60AF00EFA1DD /* URLPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URLPathScannerTests.swift */; };
+		C4E79A3F1C8B60B000EFA1DD /* URLPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URLPathScannerTests.swift */; };
+		C4E79A401C8B60B000EFA1DD /* URLPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A3C1C8B5A0F00EFA1DD /* URLPathScannerTests.swift */; };
+		C4E79A451C8B840200EFA1DD /* URLPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A441C8B840200EFA1DD /* URLPathScanner.swift */; };
+		C4E79A471C8B842700EFA1DD /* URLPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A461C8B842700EFA1DD /* URLPathToken.swift */; };
+		C4E79A481C8B843700EFA1DD /* URLPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A461C8B842700EFA1DD /* URLPathToken.swift */; };
+		C4E79A491C8B843900EFA1DD /* URLPathToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A461C8B842700EFA1DD /* URLPathToken.swift */; };
+		C4E79A4A1C8B843D00EFA1DD /* URLPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A441C8B840200EFA1DD /* URLPathScanner.swift */; };
+		C4E79A4B1C8B843E00EFA1DD /* URLPathScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E79A441C8B840200EFA1DD /* URLPathScanner.swift */; };
 		C4F19A041C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
 		C4F19A051C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
 		C4F19A061C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */; };
@@ -78,7 +78,6 @@
 /* Begin PBXFileReference section */
 		231DF29F841315C3D4F0B2D0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		231DFCDDA4A3CDE9EA79C976 /* RoutingGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingGraph.swift; sourceTree = "<group>"; };
-		231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathToken.swift; sourceTree = "<group>"; };
 		C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternScanner.swift; sourceTree = "<group>"; };
 		C418DEDA1C7D0A8000630170 /* RoutingPatternToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternToken.swift; sourceTree = "<group>"; };
 		C418DEE11C7D0A9B00630170 /* RoutingPatternScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternScannerTests.swift; sourceTree = "<group>"; };
@@ -94,8 +93,9 @@
 		C47B8AAC1C7B554900C2C164 /* RouterX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47B8AB51C7B554900C2C164 /* RouterXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C492D3D81C80532700286FDB /* RouterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
-		C4E79A381C8B59F000EFA1DD /* URIPathScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathScanner.swift; sourceTree = "<group>"; };
-		C4E79A3C1C8B5A0F00EFA1DD /* URIPathScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPathScannerTests.swift; sourceTree = "<group>"; };
+		C4E79A3C1C8B5A0F00EFA1DD /* URLPathScannerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathScannerTests.swift; sourceTree = "<group>"; };
+		C4E79A441C8B840200EFA1DD /* URLPathScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathScanner.swift; sourceTree = "<group>"; };
+		C4E79A461C8B842700EFA1DD /* URLPathToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathToken.swift; sourceTree = "<group>"; };
 		C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingPatternParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,7 +202,7 @@
 				231DFA9BA88C12B35E8570A0 /* Extensions */,
 				C418DEE11C7D0A9B00630170 /* RoutingPatternScannerTests.swift */,
 				C4F19A031C7E09810073DC5D /* RoutingPatternParserTests.swift */,
-				C4E79A3C1C8B5A0F00EFA1DD /* URIPathScannerTests.swift */,
+				C4E79A3C1C8B5A0F00EFA1DD /* URLPathScannerTests.swift */,
 				C492D3D81C80532700286FDB /* RouterTests.swift */,
 			);
 			path = Tests;
@@ -216,9 +216,9 @@
 				C418DED91C7D0A8000630170 /* RoutingPatternScanner.swift */,
 				C418DEDA1C7D0A8000630170 /* RoutingPatternToken.swift */,
 				C430948A1C7C28D00038A0EC /* RoutingPatternParser.swift */,
+				C4E79A441C8B840200EFA1DD /* URLPathScanner.swift */,
+				C4E79A461C8B842700EFA1DD /* URLPathToken.swift */,
 				C43094861C7B842C0038A0EC /* RouterX.swift */,
-				231DFDBB94E728F0BBAE9B02 /* URIPathToken.swift */,
-				C4E79A381C8B59F000EFA1DD /* URIPathScanner.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -466,10 +466,10 @@
 				C43094921C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */,
 				C430948C1C7C28D00038A0EC /* RoutingGraph.swift in Sources */,
 				C418DEDB1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
+				C4E79A451C8B840200EFA1DD /* URLPathScanner.swift in Sources */,
 				C418DEDE1C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
+				C4E79A471C8B842700EFA1DD /* URLPathToken.swift in Sources */,
 				C43094871C7B842C0038A0EC /* RouterX.swift in Sources */,
-				231DF6E7002232B3CC6174AF /* URIPathToken.swift in Sources */,
-				C4E79A391C8B59F000EFA1DD /* URIPathScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +479,7 @@
 			files = (
 				C492D3D91C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A041C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
-				C4E79A3E1C8B60AF00EFA1DD /* URIPathScannerTests.swift in Sources */,
+				C4E79A3E1C8B60AF00EFA1DD /* URLPathScannerTests.swift in Sources */,
 				C418DEE21C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 				231DF6D69AF6E590A37DC0F7 /* RoutingGraph.swift in Sources */,
 			);
@@ -493,9 +493,9 @@
 				C418DEDC1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
 				C418DEDF1C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
 				C430948D1C7C28D00038A0EC /* RoutingGraph.swift in Sources */,
+				C4E79A481C8B843700EFA1DD /* URLPathToken.swift in Sources */,
 				C43094931C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */,
-				231DFE1FAA835F5B88ACAA38 /* URIPathToken.swift in Sources */,
-				C4E79A3A1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */,
+				C4E79A4A1C8B843D00EFA1DD /* URLPathScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +505,7 @@
 			files = (
 				C492D3DA1C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A051C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
-				C4E79A3F1C8B60B000EFA1DD /* URIPathScannerTests.swift in Sources */,
+				C4E79A3F1C8B60B000EFA1DD /* URLPathScannerTests.swift in Sources */,
 				C418DEE31C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 				231DFBBE6989F770CA952A66 /* RoutingGraph.swift in Sources */,
 			);
@@ -519,9 +519,9 @@
 				C418DEDD1C7D0A8000630170 /* RoutingPatternScanner.swift in Sources */,
 				C418DEE01C7D0A8000630170 /* RoutingPatternToken.swift in Sources */,
 				C430948E1C7C28D00038A0EC /* RoutingGraph.swift in Sources */,
+				C4E79A491C8B843900EFA1DD /* URLPathToken.swift in Sources */,
 				C43094941C7C28D00038A0EC /* RoutingPatternParser.swift in Sources */,
-				231DF73938F4296E01305770 /* URIPathToken.swift in Sources */,
-				C4E79A3B1C8B59F400EFA1DD /* URIPathScanner.swift in Sources */,
+				C4E79A4B1C8B843E00EFA1DD /* URLPathScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +531,7 @@
 			files = (
 				C492D3DB1C80532700286FDB /* RouterTests.swift in Sources */,
 				C4F19A061C7E09810073DC5D /* RoutingPatternParserTests.swift in Sources */,
-				C4E79A401C8B60B000EFA1DD /* URIPathScannerTests.swift in Sources */,
+				C4E79A401C8B60B000EFA1DD /* URLPathScannerTests.swift in Sources */,
 				C418DEE41C7D0A9C00630170 /* RoutingPatternScannerTests.swift in Sources */,
 				231DF0DBB8E7681089400608 /* RoutingGraph.swift in Sources */,
 			);

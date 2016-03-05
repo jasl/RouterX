@@ -50,7 +50,7 @@ public class Router {
             return nil
         }
 
-        let tokens = URIPathScanner.tokenize(path)
+        let tokens = URLPathScanner.tokenize(path)
         if tokens.isEmpty {
             return nil
         }

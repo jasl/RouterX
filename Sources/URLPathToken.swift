@@ -1,6 +1,6 @@
 import Foundation
 
-public enum URIPathToken {
+public enum URLPathToken {
     case Slash
     case Dot
     case Literal(String)
@@ -15,20 +15,9 @@ public enum URIPathToken {
             return .Literal(value)
         }
     }
-
-    init(byComponent component: String) {
-        switch component {
-        case "/":
-            self = .Slash
-        case ".":
-            self = .Dot
-        default:
-            self = .Literal(component)
-        }
-    }
 }
 
-extension URIPathToken: CustomStringConvertible, CustomDebugStringConvertible {
+extension URLPathToken: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         switch self {
         case .Slash:
@@ -52,9 +41,9 @@ extension URIPathToken: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-extension URIPathToken: Equatable { }
+extension URLPathToken: Equatable { }
 
-public func == (lhs: URIPathToken, rhs: URIPathToken) -> Bool {
+public func == (lhs: URLPathToken, rhs: URLPathToken) -> Bool {
     switch (lhs, rhs) {
     case (.Slash, .Slash):
         return true

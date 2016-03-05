@@ -1,6 +1,6 @@
 import Foundation
 
-public struct URIPathScanner {
+public struct URLPathScanner {
     private static let stopWordsSet: Set<Character> = [".", "/"]
 
     public let path: String
@@ -19,7 +19,7 @@ public struct URIPathScanner {
         return self.path.substringFromIndex(self.position)
     }
 
-    public mutating func nextToken() -> URIPathToken? {
+    public mutating func nextToken() -> URLPathToken? {
         if self.isEOF {
             return nil
         }
@@ -40,7 +40,7 @@ public struct URIPathScanner {
         var fragment = ""
         var stepPosition = 0
         for char in self.unScannedFragment.characters {
-            if URIPathScanner.stopWordsSet.contains(char) {
+            if URLPathScanner.stopWordsSet.contains(char) {
                 break
             }
 
@@ -53,10 +53,10 @@ public struct URIPathScanner {
         return .Literal("\(firstChar)\(fragment)")
     }
 
-    public static func tokenize(path: String) -> [URIPathToken] {
+    public static func tokenize(path: String) -> [URLPathToken] {
         var scanner = self.init(path: path)
 
-        var tokens: [URIPathToken] = []
+        var tokens: [URLPathToken] = []
         while let token = scanner.nextToken() {
             tokens.append(token)
         }
