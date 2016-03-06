@@ -3,7 +3,7 @@ import XCTest
 @testable import RouterX
 
 class RoutingPatternParserTests: XCTestCase {
-    let blankTerminalHandler: RouteTerminalHandlerType = { _ in }
+    let blankTerminalHandler: RouteTerminalHandler = { _ in }
 
     override func setUp() {
         super.setUp()

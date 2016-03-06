@@ -20,7 +20,7 @@ class RouterTests: XCTestCase {
         let pattern1 = "/articles(/page/:page(/per_page/:per_page))(/sort/:sort)(.:format)"
         let pattern1Case = "/articles/page/2/sort/recent.json"
         var isPattern1HandlerPerformed = false
-        let pattern1Handler: RouteTerminalHandlerType = { url, parameters, context in
+        let pattern1Handler: RouteTerminalHandler = { url, parameters, context in
             isPattern1HandlerPerformed = true
 
             XCTAssertEqual(parameters["page"], "2")

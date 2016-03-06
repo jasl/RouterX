@@ -1,14 +1,14 @@
 import Foundation
 
-public typealias RouteTerminalHandlerType = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
-public typealias RouteUnmatchHandlerType = ((NSURL, context: AnyObject?) -> ())
+public typealias RouteTerminalHandler = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
+public typealias RouteUnmatchHandler = ((NSURL, context: AnyObject?) -> ())
 
 public struct MatchedRoute {
     public let url: NSURL
     public let parametars: [String: String]
-    private let handler: RouteTerminalHandlerType
+    private let handler: RouteTerminalHandler
 
-    public init(url: NSURL, parameters: [String: String], handler: RouteTerminalHandlerType) {
+    public init(url: NSURL, parameters: [String: String], handler: RouteTerminalHandler) {
         self.url = url
         self.parametars = parameters
         self.handler = handler
@@ -21,9 +21,9 @@ public struct MatchedRoute {
 
 public class Router {
     private let rootRoute: RouteVertex
-    private let defaultUnmatchHandler: RouteUnmatchHandlerType
+    private let defaultUnmatchHandler: RouteUnmatchHandler
 
-    public init(defaultUnmatchHandler: RouteUnmatchHandlerType? = nil) {
+    public init(defaultUnmatchHandler: RouteUnmatchHandler? = nil) {
         self.rootRoute = RouteVertex()
 
         if let unmatchHandler = defaultUnmatchHandler {
@@ -33,7 +33,7 @@ public class Router {
         }
     }
 
-    public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandlerType) -> Bool {
+    public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandler) -> Bool {
         let tokens = RoutingPatternScanner.tokenize(pattern)
 
         do {
@@ -85,7 +85,7 @@ public class Router {
         return matchURL(url)
     }
 
-    public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandlerType? = nil) -> Bool {
+    public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandler? = nil) -> Bool {
         guard let matchedRoute = self.matchURL(url) else {
             if let handler = unmatchHandler {
                 handler(url, context: context)
@@ -101,7 +101,7 @@ public class Router {
         return true
     }
 
-    public func matchURLPathAndDoHandler(urlPath: String, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandlerType? = nil) -> Bool {
+    public func matchURLPathAndDoHandler(urlPath: String, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandler? = nil) -> Bool {
         guard let url = NSURL(string: urlPath) else {
             return false
         }

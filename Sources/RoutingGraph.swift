@@ -34,9 +34,9 @@ public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
 public class RouteVertex {
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
     public var epsilonRoute: (String, RouteVertex)?
-    public var handler: RouteTerminalHandlerType?
+    public var handler: RouteTerminalHandler?
 
-    public init(handler: RouteTerminalHandlerType? = nil) {
+    public init(handler: RouteTerminalHandler? = nil) {
         self.handler = handler
     }
 

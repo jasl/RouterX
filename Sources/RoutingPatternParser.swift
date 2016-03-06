@@ -9,9 +9,9 @@ public class RoutingPatternParser {
     private typealias RoutingPatternTokenGenerator = IndexingGenerator<Array<RoutingPatternToken>>
 
     private let routingPatternTokens: [RoutingPatternToken]
-    private let terminalHandler: RouteTerminalHandlerType
+    private let terminalHandler: RouteTerminalHandler
 
-    public init(routingPatternTokens: [RoutingPatternToken], terminalHandler: RouteTerminalHandlerType) {
+    public init(routingPatternTokens: [RoutingPatternToken], terminalHandler: RouteTerminalHandler) {
         self.routingPatternTokens = routingPatternTokens
         self.terminalHandler = terminalHandler
     }
@@ -30,7 +30,7 @@ public class RoutingPatternParser {
         }
     }
 
-    public class func parseAndAppendTo(rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], terminalHandler: RouteTerminalHandlerType) throws {
+    public class func parseAndAppendTo(rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], terminalHandler: RouteTerminalHandler) throws {
         let parser = RoutingPatternParser(routingPatternTokens: routingPatternTokens, terminalHandler: terminalHandler)
         try parser.parseAndAppendTo(rootRoute)
     }
