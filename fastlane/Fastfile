@@ -16,66 +16,59 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "1.63.0"
+fastlane_version "1.66.0"
 
 desc "Run all tests"
-  lane :test do
-    scan(scheme: "RouterX iOS", clean: true, code_coverage: true)
-    scan(scheme: "RouterX OSX", clean: true, code_coverage: true)
-    scan(scheme: "RouterX tvOS", clean: true, code_coverage: true)
+lane :test do
+  scan(scheme: "RouterX iOS", clean: true, code_coverage: true)
+  scan(scheme: "RouterX OSX", clean: true, code_coverage: true)
+  scan(scheme: "RouterX tvOS", clean: true, code_coverage: true)
 
-    Actions.sh("killall Simulator")
-  end
+  Actions.sh("killall Simulator")
+end
 
-  desc "Build for Carthage"
-  lane :carthage_lint do
-    Actions.sh("cd .. && carthage build --no-skip-current && cd fastlane")
-  end
+desc "Build for Carthage"
+lane :carthage_lint do
+  Actions.sh("cd .. && carthage build --no-skip-current && cd fastlane")
+end
 
-  desc "Lint for Cocoapods"
-  lane :pod_lint do
-    Actions.sh("cd .. && pod lib lint && cd fastlane")
-  end
+desc "Lint for Cocoapods"
+lane :pod_lint do
+  Actions.sh("cd .. && pod lib lint && cd fastlane")
+end
 
-  desc "Lint"
-  lane :lint do
-    carthage_lint
-    pod_lint
-  end
+desc "Lint"
+lane :lint do
+  carthage_lint
+  pod_lint
+end
 
-  desc "Release new version"
-  lane :release do |options|
-    target_version = options[:version]
-    raise "The version is missed. Use `fastlane release version:{version_number}`.`" if target_version.nil?
+desc "Release new version"
+lane :release do |options|
+  target_version = options[:version]
+  abort "The version is missed. Use `fastlane release version:{version_number}." if target_version.nil?
 
-    ensure_git_branch
-    ensure_git_status_clean
+  ensure_git_branch
+  ensure_git_status_clean
 
-    test
-    carthage_lint
+  sync_build_number_to_git
+  increment_version_number(version_number: target_version)
+  version_bump_podspec(path: "RouterX.podspec", version_number: target_version)
 
-    sync_build_number_to_git
-    increment_version_number(version_number: target_version)
-    version_bump_podspec(path: "RouterX.podspec", version_number: target_version)
+  git_commit_all(message: "Bump version to #{target_version}")
+  add_git_tag tag: target_version
+  push_to_git_remote
 
-    log = extract_current_change_log(version: target_version)
-    release_log = update_change_log(log: log)
+  set_github_release(
+    repository_name: "jasl/RouterX",
+    api_token: ENV['GITHUB_TOKEN'],
+    name: target_version,
+    tag_name: target_version,
+    description: "RouterX #{target_version}"
+  )
 
-    git_commit_all(message: "Bump version to #{target_version}")
-    add_git_tag tag: target_version
-
-    push_to_git_remote
-
-    set_github_release(
-      repository_name: "jasl/RouterX",
-      api_token: ENV['GITHUB_TOKEN'],
-      name: release_log[:title],
-      tag_name: target_version,
-      description: release_log[:text]
-    )
-
-    pod_push
-  end
+  pod_push
+end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md
