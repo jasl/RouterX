@@ -18,8 +18,17 @@
 # Update this, if you use features of a newer version
 fastlane_version "1.66.0"
 
-desc "Run all tests"
-lane :test do
+desc "Run tests"
+lane :test do |options|
+  if scheme = options[:scheme]
+    scan(scheme: scheme, clean: true, code_coverage: true)
+  else
+    test_all_scheme
+  end
+end
+
+desc "Run tests to all schemes"
+lane :test_all_schemes do
   scan(scheme: "RouterX iOS", clean: true, code_coverage: true)
   scan(scheme: "RouterX OSX", clean: true, code_coverage: true)
   scan(scheme: "RouterX tvOS", clean: true, code_coverage: true)
@@ -50,6 +59,9 @@ lane :release do |options|
 
   ensure_git_branch
   ensure_git_status_clean
+
+  test_all_schemes
+  lint
 
   sync_build_number_to_git
   increment_version_number(version_number: target_version)

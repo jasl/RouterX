@@ -9,7 +9,12 @@ sudo gem install fastlane
 ```
 fastlane test
 ```
-Run all tests
+Run tests
+### test_all_schemes
+```
+fastlane test_all_schemes
+```
+Run tests to all schemes
 ### carthage_lint
 ```
 fastlane carthage_lint
