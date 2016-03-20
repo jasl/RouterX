@@ -1,10 +1,7 @@
 //
 //  Package.swift
-//  RouterX
 //
-//  Created by Jun Jiang on 16/2/22.
-//
-//  Copyright (c) 2016 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2016 Jun Jiang <jasl9187@hotmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
