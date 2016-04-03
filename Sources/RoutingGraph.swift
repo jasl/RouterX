@@ -1,5 +1,7 @@
 import Foundation
 
+public typealias PatternIdentifier = Int
+
 public enum RouteEdge {
     case Dot
     case Slash
@@ -34,14 +36,14 @@ public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
 public class RouteVertex {
     public var nextRoutes: [RouteEdge: RouteVertex] = [:]
     public var epsilonRoute: (String, RouteVertex)?
-    public var handler: RouteTerminalHandler?
+    public var patternIdentifier: PatternIdentifier?
 
-    public init(handler: RouteTerminalHandler? = nil) {
-        self.handler = handler
+    public init(patternIdentifier: PatternIdentifier? = nil) {
+        self.patternIdentifier = patternIdentifier
     }
 
     public var isTerminal: Bool {
-        return self.handler != nil
+        return self.patternIdentifier != nil
     }
 
     public var isFinale: Bool {

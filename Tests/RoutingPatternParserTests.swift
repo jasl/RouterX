@@ -3,7 +3,7 @@ import XCTest
 @testable import RouterX
 
 class RoutingPatternParserTests: XCTestCase {
-    let blankTerminalHandler: RouteTerminalHandler = { _ in }
+    let patternIdentifier: RouterX.PatternIdentifier = 1
 
     override func setUp() {
         super.setUp()
@@ -16,7 +16,7 @@ class RoutingPatternParserTests: XCTestCase {
     func testParsingFailureShouldThrowError() {
         let badTokens: [RoutingPatternToken] = [.RParen, .Literal("bad")]
         let route = RouteVertex()
-        let parser = RoutingPatternParser(routingPatternTokens: badTokens, terminalHandler: blankTerminalHandler)
+        let parser = RoutingPatternParser(routingPatternTokens: badTokens, patternIdentifier: self.patternIdentifier)
 
         do {
             try parser.parseAndAppendTo(route)
@@ -31,7 +31,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)
@@ -46,7 +46,7 @@ class RoutingPatternParserTests: XCTestCase {
             ]
 
             for tokens in cases {
-                parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+                parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
                 route = RouteVertex()
 
                 try parser.parseAndAppendTo(route)
@@ -57,7 +57,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .RParen]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -72,7 +72,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Literal("foo"), .Dot]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -86,7 +86,7 @@ class RoutingPatternParserTests: XCTestCase {
             ]
 
             for tokens in cases {
-                parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+                parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
                 route = RouteVertex()
 
                 try parser.parseAndAppendTo(route)
@@ -99,7 +99,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Literal("foo"), .Dot, .Dot]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -114,7 +114,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Literal("articles")]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)
@@ -128,7 +128,7 @@ class RoutingPatternParserTests: XCTestCase {
             ]
 
             for tokens in cases {
-                parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+                parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
                 route = RouteVertex()
 
                 try parser.parseAndAppendTo(route)
@@ -139,7 +139,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Literal("foo"), .Literal("bar")]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -154,7 +154,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Symbol("id")]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)
@@ -168,7 +168,7 @@ class RoutingPatternParserTests: XCTestCase {
             ]
 
             for tokens in cases {
-                parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+                parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
                 route = RouteVertex()
 
                 try parser.parseAndAppendTo(route)
@@ -179,7 +179,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Symbol("foo"), .Symbol("bar")]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -194,7 +194,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Star("info"), .Slash]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -203,7 +203,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .Star("info")]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)
@@ -221,7 +221,7 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .LParen, .LParen, .RParen, .RParen, .RParen]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
             try parser.parseAndAppendTo(route)
 
@@ -230,13 +230,13 @@ class RoutingPatternParserTests: XCTestCase {
 
         do {
             tokens = [.Slash, .LParen, .Slash, .Literal("test"), .RParen]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)
 
             tokens = [.Slash, .LParen, .Slash, .Literal("test"), .RParen, .LParen, .Slash, .Symbol("foo"), .RParen]
-            parser = RoutingPatternParser(routingPatternTokens: tokens, terminalHandler: blankTerminalHandler)
+            parser = RoutingPatternParser(routingPatternTokens: tokens, patternIdentifier: self.patternIdentifier)
             route = RouteVertex()
 
             try parser.parseAndAppendTo(route)

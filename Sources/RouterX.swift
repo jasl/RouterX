@@ -1,31 +1,15 @@
 import Foundation
 
-public typealias RouteTerminalHandler = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
-public typealias RouteUnmatchHandler = ((NSURL, context: AnyObject?) -> ())
-
-public struct MatchedRoute {
-    public let url: NSURL
-    public let parametars: [String: String]
-    private let handler: RouteTerminalHandler
-
-    public init(url: NSURL, parameters: [String: String], handler: RouteTerminalHandler) {
-        self.url = url
-        self.parametars = parameters
-        self.handler = handler
-    }
-
-    public func doHandler(context: AnyObject? = nil) {
-        self.handler(self.url, parameters: self.parametars, context: context)
-    }
-}
+public typealias MatchRouteHandler = ((NSURL, parameters: [String:String], context: AnyObject?) -> Void)
+public typealias UnmatchRouteHandler = ((NSURL, context: AnyObject?) -> ())
 
 public class Router {
-    private let rootRoute: RouteVertex
-    private let defaultUnmatchHandler: RouteUnmatchHandler
+    private let core: RouterXCore = RouterXCore()
+    private let defaultUnmatchHandler: UnmatchRouteHandler
 
-    public init(defaultUnmatchHandler: RouteUnmatchHandler? = nil) {
-        self.rootRoute = RouteVertex()
+    private var handlerMappings: [PatternIdentifier: MatchRouteHandler] = [:]
 
+    public init(defaultUnmatchHandler: UnmatchRouteHandler? = nil) {
         if let unmatchHandler = defaultUnmatchHandler {
             self.defaultUnmatchHandler = unmatchHandler
         } else {
@@ -33,60 +17,19 @@ public class Router {
         }
     }
 
-    public func registerRoutingPattern(pattern: String, handler: RouteTerminalHandler) -> Bool {
-        let tokens = RoutingPatternScanner.tokenize(pattern)
-
-        do {
-            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, terminalHandler: handler)
+    public func registerRoutingPattern(pattern: String, handler: MatchRouteHandler) -> Bool {
+        let patternIdentifier = pattern.hashValue
+        if self.core.registerRoutingPattern(pattern, patternIdentifier: patternIdentifier) {
+            self.handlerMappings[patternIdentifier] = handler
 
             return true
-        } catch {
+        } else {
             return false
         }
     }
 
-    public func matchURL(url: NSURL) -> MatchedRoute? {
-        guard let path = url.path else {
-            return nil
-        }
-
-        let tokens = URLPathScanner.tokenize(path)
-        if tokens.isEmpty {
-            return nil
-        }
-
-        var parameters: [String: String] = [:]
-
-        var tokensGenerator = tokens.generate()
-        var targetRoute: RouteVertex = rootRoute
-        while let token = tokensGenerator.next() {
-            if let determinativeRoute = targetRoute.nextRoutes[token.routeEdge] {
-                targetRoute = determinativeRoute
-            } else if let epsilonRoute = targetRoute.epsilonRoute {
-                targetRoute = epsilonRoute.1
-                parameters[epsilonRoute.0] = String(token).stringByRemovingPercentEncoding ?? ""
-            } else {
-                return nil
-            }
-        }
-
-        guard let handler = targetRoute.handler else {
-            return nil
-        }
-
-        return MatchedRoute(url: url, parameters: parameters, handler: handler)
-    }
-
-    public func matchURLPath(urlPath: String) -> MatchedRoute? {
-        guard let url = NSURL(string: urlPath) else {
-            return nil
-        }
-
-        return matchURL(url)
-    }
-
-    public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandler? = nil) -> Bool {
-        guard let matchedRoute = self.matchURL(url) else {
+    public func matchURLAndDoHandler(url: NSURL, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
+        guard let matchedRoute = self.core.matchURL(url) else {
             if let handler = unmatchHandler {
                 handler(url, context: context)
             } else {
@@ -96,12 +39,12 @@ public class Router {
             return false
         }
 
-        matchedRoute.doHandler(context)
+        self.handlerMappings[matchedRoute.patternIdentifier]!(url, parameters: matchedRoute.parametars, context: context)
 
         return true
     }
 
-    public func matchURLPathAndDoHandler(urlPath: String, context: AnyObject? = nil, unmatchHandler: RouteUnmatchHandler? = nil) -> Bool {
+    public func matchURLPathAndDoHandler(urlPath: String, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
         guard let url = NSURL(string: urlPath) else {
             return false
         }
