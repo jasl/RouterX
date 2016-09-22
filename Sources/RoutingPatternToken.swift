@@ -1,52 +1,52 @@
 import Foundation
 
 public enum RoutingPatternToken {
-    case Slash
-    case Dot
+    case slash
+    case dot
 
-    case Literal(String)
-    case Symbol(String)
-    case Star(String)
+    case literal(String)
+    case symbol(String)
+    case star(String)
 
-    case LParen
-    case RParen
+    case lParen
+    case rParen
 }
 
 extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         switch self {
-        case .Slash:
+        case .slash:
             return "/"
-        case .Dot:
+        case .dot:
             return "."
-        case .LParen:
+        case .lParen:
             return "("
-        case .RParen:
+        case .rParen:
             return ")"
-        case .Literal(let value):
+        case .literal(let value):
             return value
-        case .Symbol(let value):
+        case .symbol(let value):
             return ":\(value)"
-        case .Star(let value):
+        case .star(let value):
             return "*\(value)"
         }
     }
 
     public var debugDescription: String {
         switch self {
-        case .Slash:
+        case .slash:
             return "[Slash]"
-        case .Dot:
+        case .dot:
             return "[Dot]"
-        case .LParen:
+        case .lParen:
             return "[LParen]"
-        case .RParen:
+        case .rParen:
             return "[RParen]"
-        case .Literal(let value):
+        case .literal(let value):
             return "[Literal \"\(value)\"]"
-        case .Symbol(let value):
+        case .symbol(let value):
             return "[Symbol \"\(value)\"]"
-        case .Star(let value):
+        case .star(let value):
             return "[Star \"\(value)\"]"
         }
     }
@@ -56,19 +56,19 @@ extension RoutingPatternToken: Equatable { }
 
 public func == (lhs: RoutingPatternToken, rhs: RoutingPatternToken) -> Bool {
     switch (lhs, rhs) {
-    case (.Slash, .Slash):
+    case (.slash, .slash):
         return true
-    case (.Dot, .Dot):
+    case (.dot, .dot):
         return true
-    case (let .Literal(lval), let .Literal(rval)):
+    case (let .literal(lval), let .literal(rval)):
         return lval == rval
-    case (let .Symbol(lval), let .Symbol(rval)):
+    case (let .symbol(lval), let .symbol(rval)):
         return lval == rval
-    case (let .Star(lval), let .Star(rval)):
+    case (let .star(lval), let .star(rval)):
         return lval == rval
-    case (.LParen, .LParen):
+    case (.lParen, .lParen):
         return true
-    case (.RParen, .RParen):
+    case (.rParen, .rParen):
         return true
     default:
         return false

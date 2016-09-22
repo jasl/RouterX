@@ -3,19 +3,19 @@ import Foundation
 public typealias PatternIdentifier = Int
 
 public enum RouteEdge {
-    case Dot
-    case Slash
-    case Literal(String)
+    case dot
+    case slash
+    case literal(String)
 }
 
 extension RouteEdge: Equatable, Hashable, CustomDebugStringConvertible, CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Literal(let value):
+        case .literal(let value):
             return value
-        case .Dot:
+        case .dot:
             return "."
-        case .Slash:
+        case .slash:
             return "/"
         }
     }
@@ -33,20 +33,20 @@ public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
     return lhs.hashValue == rhs.hashValue
 }
 
-public class RouteVertex {
-    public var nextRoutes: [RouteEdge: RouteVertex] = [:]
-    public var epsilonRoute: (String, RouteVertex)?
-    public var patternIdentifier: PatternIdentifier?
+open class RouteVertex {
+    open var nextRoutes: [RouteEdge: RouteVertex] = [:]
+    open var epsilonRoute: (String, RouteVertex)?
+    open var patternIdentifier: PatternIdentifier?
 
     public init(patternIdentifier: PatternIdentifier? = nil) {
         self.patternIdentifier = patternIdentifier
     }
 
-    public var isTerminal: Bool {
+    open var isTerminal: Bool {
         return self.patternIdentifier != nil
     }
 
-    public var isFinale: Bool {
+    open var isFinale: Bool {
         return self.nextRoutes.isEmpty && self.epsilonRoute == nil
     }
 }

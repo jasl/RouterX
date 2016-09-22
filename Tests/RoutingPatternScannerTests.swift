@@ -14,26 +14,26 @@ class RoutingPatternScannerTests: XCTestCase {
 
     func testScanner() {
         let cases: [String: Array<RoutingPatternToken>] = [
-                "/": [.Slash],
-                "*omg": [.Star("omg")],
-                "/page": [.Slash, .Literal("page")],
-                "/page/": [.Slash, .Literal("page"), .Slash],
-                "/page!": [.Slash, .Literal("page!")],
-                "/page$": [.Slash, .Literal("page$")],
-                "/page&": [.Slash, .Literal("page&")],
-                "/page'": [.Slash, .Literal("page'")],
-                "/page*": [.Slash, .Literal("page*")],
-                "/page+": [.Slash, .Literal("page+")],
-                "/page,": [.Slash, .Literal("page,")],
-                "/page=": [.Slash, .Literal("page=")],
-                "/page@": [.Slash, .Literal("page@")],
-                "/~page": [.Slash, .Literal("~page")],
-                "/pa-ge": [.Slash, .Literal("pa-ge")],
-                "/:page": [.Slash, .Symbol("page")],
-                "/(:page)": [.Slash, .LParen, .Symbol("page"), .RParen],
-                "(/:action)": [.LParen, .Slash, .Symbol("action"), .RParen],
-                "(())": [.LParen, .LParen, .RParen, .RParen],
-                "(.:format)": [.LParen, .Dot, .Symbol("format"), .RParen]
+                "/": [.slash],
+                "*omg": [.star("omg")],
+                "/page": [.slash, .literal("page")],
+                "/page/": [.slash, .literal("page"), .slash],
+                "/page!": [.slash, .literal("page!")],
+                "/page$": [.slash, .literal("page$")],
+                "/page&": [.slash, .literal("page&")],
+                "/page'": [.slash, .literal("page'")],
+                "/page*": [.slash, .literal("page*")],
+                "/page+": [.slash, .literal("page+")],
+                "/page,": [.slash, .literal("page,")],
+                "/page=": [.slash, .literal("page=")],
+                "/page@": [.slash, .literal("page@")],
+                "/~page": [.slash, .literal("~page")],
+                "/pa-ge": [.slash, .literal("pa-ge")],
+                "/:page": [.slash, .symbol("page")],
+                "/(:page)": [.slash, .lParen, .symbol("page"), .rParen],
+                "(/:action)": [.lParen, .slash, .symbol("action"), .rParen],
+                "(())": [.lParen, .lParen, .rParen, .rParen],
+                "(.:format)": [.lParen, .dot, .symbol("format"), .rParen]
         ]
 
         for (pattern, expect) in cases {
@@ -69,7 +69,7 @@ class RoutingPatternScannerTests: XCTestCase {
 
         for pattern in cases {
             let tokens = RoutingPatternScanner.tokenize(pattern)
-            let roundTripPattern = tokens.reduce("") { ($0 as String) + String($1) }
+            let roundTripPattern = tokens.reduce("") { ($0 as String) + String(describing: $1) }
 
             XCTAssertEqual(roundTripPattern, pattern)
         }

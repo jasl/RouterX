@@ -36,7 +36,7 @@ class RouterTests: XCTestCase {
 
         XCTAssertTrue(router.registerRoutingPattern(pattern1, handler: pattern1Handler))
 
-        XCTAssertTrue(router.matchURLPathAndDoHandler(pattern1Case, context: "foo"))
+        XCTAssertTrue(router.matchURLPathAndDoHandler(pattern1Case, context: "foo" as AnyObject?))
         XCTAssertTrue(isPattern1HandlerPerformed)
 
         let unmatchedCase = "/articles/2/edit"

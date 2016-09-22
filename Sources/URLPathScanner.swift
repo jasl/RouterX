@@ -1,10 +1,10 @@
 import Foundation
 
 public struct URLPathScanner {
-    private static let stopWordsSet: Set<Character> = [".", "/"]
+    fileprivate static let stopWordsSet: Set<Character> = [".", "/"]
 
     public let path: String
-    private(set) var position: String.Index
+    fileprivate(set) var position: String.Index
 
     public init(path: String) {
         self.path = path
@@ -15,8 +15,8 @@ public struct URLPathScanner {
         return self.position == self.path.endIndex
     }
 
-    private var unScannedFragment: String {
-        return self.path.substringFromIndex(self.position)
+    fileprivate var unScannedFragment: String {
+        return self.path.substring(from: self.position)
     }
 
     public mutating func nextToken() -> URLPathToken? {
@@ -25,14 +25,14 @@ public struct URLPathScanner {
         }
 
         let firstChar = self.unScannedFragment.characters.first!
-
-        self.position = self.position.advancedBy(1)
+      
+        self.position = path.index(self.position, offsetBy: 1)
 
         switch firstChar {
         case "/":
-            return .Slash
+            return .slash
         case ".":
-            return .Dot
+            return .dot
         default:
             break
         }
@@ -48,12 +48,12 @@ public struct URLPathScanner {
             stepPosition += 1
         }
 
-        self.position = self.position.advancedBy(stepPosition)
+        self.position = path.index(self.position, offsetBy: stepPosition)
 
-        return .Literal("\(firstChar)\(fragment)")
+        return .literal("\(firstChar)\(fragment)")
     }
 
-    public static func tokenize(path: String) -> [URLPathToken] {
+    public static func tokenize(_ path: String) -> [URLPathToken] {
         var scanner = self.init(path: path)
 
         var tokens: [URLPathToken] = []

@@ -1,25 +1,25 @@
 import Foundation
 
 public struct MatchedRoute {
-    public let url: NSURL
+    public let url: URL
     public let parametars: [String: String]
     public let patternIdentifier: PatternIdentifier
 
-    public init(url: NSURL, parameters: [String: String], patternIdentifier: PatternIdentifier) {
+    public init(url: URL, parameters: [String: String], patternIdentifier: PatternIdentifier) {
         self.url = url
         self.parametars = parameters
         self.patternIdentifier = patternIdentifier
     }
 }
 
-public class RouterXCore {
-    private let rootRoute: RouteVertex
+open class RouterXCore {
+    fileprivate let rootRoute: RouteVertex
 
     public init() {
         self.rootRoute = RouteVertex()
     }
 
-    public func registerRoutingPattern(pattern: String, patternIdentifier: PatternIdentifier) -> Bool {
+    open func registerRoutingPattern(_ pattern: String, patternIdentifier: PatternIdentifier) -> Bool {
         let tokens = RoutingPatternScanner.tokenize(pattern)
 
         do {
@@ -31,10 +31,8 @@ public class RouterXCore {
         }
     }
 
-    public func matchURL(url: NSURL) -> MatchedRoute? {
-        guard let path = url.path else {
-            return nil
-        }
+    open func matchURL(_ url: URL) -> MatchedRoute? {
+        let path = url.path
 
         let tokens = URLPathScanner.tokenize(path)
         if tokens.isEmpty {
@@ -43,14 +41,14 @@ public class RouterXCore {
 
         var parameters: [String: String] = [:]
 
-        var tokensGenerator = tokens.generate()
+        var tokensGenerator = tokens.makeIterator()
         var targetRoute: RouteVertex = rootRoute
         while let token = tokensGenerator.next() {
             if let determinativeRoute = targetRoute.nextRoutes[token.routeEdge] {
                 targetRoute = determinativeRoute
             } else if let epsilonRoute = targetRoute.epsilonRoute {
                 targetRoute = epsilonRoute.1
-                parameters[epsilonRoute.0] = String(token).stringByRemovingPercentEncoding ?? ""
+                parameters[epsilonRoute.0] = String(describing: token).removingPercentEncoding ?? ""
             } else {
                 return nil
             }
@@ -59,8 +57,8 @@ public class RouterXCore {
         return MatchedRoute(url: url, parameters: parameters, patternIdentifier: targetRoute.patternIdentifier!)
     }
 
-    public func matchURLPath(urlPath: String) -> MatchedRoute? {
-        guard let url = NSURL(string: urlPath) else {
+    open func matchURLPath(_ urlPath: String) -> MatchedRoute? {
+        guard let url = URL(string: urlPath) else {
             return nil
         }
 

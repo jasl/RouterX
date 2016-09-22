@@ -1,18 +1,18 @@
 import Foundation
 
 public enum URLPathToken {
-    case Slash
-    case Dot
-    case Literal(String)
+    case slash
+    case dot
+    case literal(String)
 
     var routeEdge: RouteEdge {
         switch self {
-        case .Slash:
-            return .Slash
-        case .Dot:
-            return .Dot
-        case let .Literal(value):
-            return .Literal(value)
+        case .slash:
+            return .slash
+        case .dot:
+            return .dot
+        case let .literal(value):
+            return .literal(value)
         }
     }
 }
@@ -20,22 +20,22 @@ public enum URLPathToken {
 extension URLPathToken: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         switch self {
-        case .Slash:
+        case .slash:
             return "/"
-        case .Dot:
+        case .dot:
             return "."
-        case .Literal(let value):
+        case .literal(let value):
             return value
         }
     }
 
     public var debugDescription: String {
         switch self {
-        case .Slash:
+        case .slash:
             return "[Slash]"
-        case .Dot:
+        case .dot:
             return "[Dot]"
-        case .Literal(let value):
+        case .literal(let value):
             return "[Literal \"\(value)\"]"
         }
     }
@@ -45,11 +45,11 @@ extension URLPathToken: Equatable { }
 
 public func == (lhs: URLPathToken, rhs: URLPathToken) -> Bool {
     switch (lhs, rhs) {
-    case (.Slash, .Slash):
+    case (.slash, .slash):
         return true
-    case (.Dot, .Dot):
+    case (.dot, .dot):
         return true
-    case (let .Literal(lval), let .Literal(rval)):
+    case (let .literal(lval), let .literal(rval)):
         return lval == rval
     default:
         return false

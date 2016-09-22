@@ -1,7 +1,7 @@
 import Foundation
 
 public struct RoutingPatternScanner {
-    private static let stopWordsSet: Set<Character> = ["(", ")", "/"]
+    fileprivate static let stopWordsSet: Set<Character> = ["(", ")", "/"]
 
     public let expression: String
 
@@ -17,7 +17,7 @@ public struct RoutingPatternScanner {
     }
 
     private var unScannedFragment: String {
-        return self.expression.substringFromIndex(self.position)
+        return self.expression.substring(from: self.position)
     }
 
     public mutating func nextToken() -> RoutingPatternToken? {
@@ -27,17 +27,17 @@ public struct RoutingPatternScanner {
 
         let firstChar = self.unScannedFragment.characters.first!
 
-        self.position = self.position.advancedBy(1)
+        self.position = expression.index(position, offsetBy: 1)
 
         switch firstChar {
         case "/":
-            return .Slash
+            return .slash
         case ".":
-            return .Dot
+            return .dot
         case "(":
-            return .LParen
+            return .lParen
         case ")":
-            return .RParen
+            return .rParen
         default:
             break
         }
@@ -53,19 +53,19 @@ public struct RoutingPatternScanner {
             stepPosition += 1
         }
 
-        self.position = self.position.advancedBy(stepPosition)
+        self.position = expression.index(self.position, offsetBy: stepPosition)
 
         switch firstChar {
         case ":":
-            return .Symbol(fragment)
+            return .symbol(fragment)
         case "*":
-            return .Star(fragment)
+            return .star(fragment)
         default:
-            return .Literal("\(firstChar)\(fragment)")
+            return .literal("\(firstChar)\(fragment)")
         }
     }
 
-    public static func tokenize(expression: String) -> [RoutingPatternToken] {
+    public static func tokenize(_ expression: String) -> [RoutingPatternToken] {
         var scanner = RoutingPatternScanner(expression: expression)
 
         var tokens: [RoutingPatternToken] = []

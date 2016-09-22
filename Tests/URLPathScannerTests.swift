@@ -14,23 +14,23 @@ class URLPathScannerTests: XCTestCase {
 
     func testScanner() {
         let cases: [String: Array<URLPathToken>] = [
-                "/": [.Slash],
-                "//": [.Slash, .Slash],
-                "/page": [.Slash, .Literal("page")],
-                "/page/": [.Slash, .Literal("page"), .Slash],
-                "/page!": [.Slash, .Literal("page!")],
-                "/page$": [.Slash, .Literal("page$")],
-                "/page&": [.Slash, .Literal("page&")],
-                "/page'": [.Slash, .Literal("page'")],
-                "/page*": [.Slash, .Literal("page*")],
-                "/page+": [.Slash, .Literal("page+")],
-                "/page,": [.Slash, .Literal("page,")],
-                "/page=": [.Slash, .Literal("page=")],
-                "/page@": [.Slash, .Literal("page@")],
-                "/~page": [.Slash, .Literal("~page")],
-                "/pa-ge": [.Slash, .Literal("pa-ge")],
-                "/pa ge": [.Slash, .Literal("pa ge")],
-                "/page.json": [.Slash, .Literal("page"), .Dot, .Literal("json")]
+                "/": [.slash],
+                "//": [.slash, .slash],
+                "/page": [.slash, .literal("page")],
+                "/page/": [.slash, .literal("page"), .slash],
+                "/page!": [.slash, .literal("page!")],
+                "/page$": [.slash, .literal("page$")],
+                "/page&": [.slash, .literal("page&")],
+                "/page'": [.slash, .literal("page'")],
+                "/page*": [.slash, .literal("page*")],
+                "/page+": [.slash, .literal("page+")],
+                "/page,": [.slash, .literal("page,")],
+                "/page=": [.slash, .literal("page=")],
+                "/page@": [.slash, .literal("page@")],
+                "/~page": [.slash, .literal("~page")],
+                "/pa-ge": [.slash, .literal("pa-ge")],
+                "/pa ge": [.slash, .literal("pa ge")],
+                "/page.json": [.slash, .literal("page"), .dot, .literal("json")]
         ]
 
         for (pattern, expect) in cases {
