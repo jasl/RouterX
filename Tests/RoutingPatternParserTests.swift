@@ -36,7 +36,7 @@ class RoutingPatternParserTests: XCTestCase {
 
             try parser.parseAndAppendTo(route)
 
-            XCTAssertNotNil(route.toNextVertex(token: .slash))
+            XCTAssertNotNil(route.toNextVertex(.slash))
 
             let cases: [[RoutingPatternToken]] = [
                     [.slash, .literal("me")],
@@ -91,7 +91,7 @@ class RoutingPatternParserTests: XCTestCase {
 
                 try parser.parseAndAppendTo(route)
 
-                XCTAssertNotNil(route.toNextVertex(token: .slash)?.toNextVertex(token: .literal("foo"))?.toNextVertex(token: .dot))
+                XCTAssertNotNil(route.toNextVertex(.slash)?.toNextVertex(.literal("foo"))?.toNextVertex(.dot))
             }
         } catch {
             XCTFail("Should not throw errors")
@@ -119,7 +119,7 @@ class RoutingPatternParserTests: XCTestCase {
 
             try parser.parseAndAppendTo(route)
 
-            XCTAssertNotNil(route.toNextVertex(token: .slash)?.toNextVertex(token: .literal("articles")))
+            XCTAssertNotNil(route.toNextVertex(.slash)?.toNextVertex(.literal("articles")))
 
             let cases: [[RoutingPatternToken]] = [
                     [.slash, .literal("me"), .slash],
@@ -159,7 +159,7 @@ class RoutingPatternParserTests: XCTestCase {
 
             try parser.parseAndAppendTo(route)
 
-            XCTAssertNotNil(route.toNextVertex(token: .slash)?.toNextVertex(token: .literal("123")))
+            XCTAssertNotNil(route.toNextVertex(.slash)?.toNextVertex(.literal("123")))
 
             let cases: [[RoutingPatternToken]] = [
                     [.slash, .symbol("id"), .slash],
@@ -208,7 +208,7 @@ class RoutingPatternParserTests: XCTestCase {
 
             try parser.parseAndAppendTo(route)
 
-            XCTAssertNotNil(route.toNextVertex(token: .slash)?.toNextVertex(token: .literal("123")))
+            XCTAssertNotNil(route.toNextVertex(.slash)?.toNextVertex(.literal("123")))
         } catch {
             XCTFail("Should not throw errors")
         }

@@ -1,7 +1,7 @@
 import Foundation
 
 public typealias MatchRouteHandler = ((URL, _ parameters: [String:String], _ context: AnyObject?) -> Void)
-public typealias UnmatchRouteHandler = ((URL, _ context: AnyObject?) -> ())
+public typealias UnmatchRouteHandler = ((URL, _ context: AnyObject?) -> Void)
 
 open class Router {
     fileprivate let core: RouterXCore = RouterXCore()
