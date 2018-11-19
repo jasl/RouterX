@@ -8,7 +8,7 @@ public enum RouteEdge {
     case literal(String)
 }
 
-extension RouteEdge: Equatable, Hashable, CustomDebugStringConvertible, CustomStringConvertible {
+extension RouteEdge: Hashable, CustomDebugStringConvertible, CustomStringConvertible {
     public var description: String {
         switch self {
         case .literal(let value):
@@ -23,14 +23,10 @@ extension RouteEdge: Equatable, Hashable, CustomDebugStringConvertible, CustomSt
     public var debugDescription: String {
         return self.description
     }
-
-    public var hashValue: Int {
-        return self.description.hashValue
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(description)
     }
-}
-
-public func == (lhs: RouteEdge, rhs: RouteEdge) -> Bool {
-    return lhs.hashValue == rhs.hashValue
 }
 
 open class RouteVertex {

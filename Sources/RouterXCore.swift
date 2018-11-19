@@ -13,7 +13,7 @@ public struct MatchedRoute {
 }
 
 open class RouterXCore {
-    fileprivate let rootRoute: RouteVertex
+    private let rootRoute: RouteVertex
 
     public init() {
         self.rootRoute = RouteVertex()
@@ -24,7 +24,6 @@ open class RouterXCore {
 
         do {
             try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: patternIdentifier)
-
             return true
         } catch {
             return false
@@ -58,10 +57,7 @@ open class RouterXCore {
     }
 
     open func matchURLPath(_ urlPath: String) -> MatchedRoute? {
-        guard let url = URL(string: urlPath) else {
-            return nil
-        }
-
+        guard let url = URL(string: urlPath) else { return nil }
         return matchURL(url)
     }
 }

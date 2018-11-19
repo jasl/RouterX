@@ -3,11 +3,11 @@ import Foundation
 public enum RoutingPatternToken {
     case slash
     case dot
-
+    
     case literal(String)
     case symbol(String)
     case star(String)
-
+    
     case lParen
     case rParen
 }
@@ -31,7 +31,7 @@ extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvert
             return "*\(value)"
         }
     }
-
+    
     public var debugDescription: String {
         switch self {
         case .slash:
@@ -60,11 +60,9 @@ public func == (lhs: RoutingPatternToken, rhs: RoutingPatternToken) -> Bool {
         return true
     case (.dot, .dot):
         return true
-    case (let .literal(lval), let .literal(rval)):
-        return lval == rval
-    case (let .symbol(lval), let .symbol(rval)):
-        return lval == rval
-    case (let .star(lval), let .star(rval)):
+    case (let .literal(lval), let .literal(rval)),
+         (let .symbol(lval), let .symbol(rval)),
+         (let .star(lval), let .star(rval)):
         return lval == rval
     case (.lParen, .lParen):
         return true
