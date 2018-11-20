@@ -2,15 +2,11 @@ import Foundation
 import XCTest
 @testable import RouterX
 
-class RoutingPatternScannerTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-    }
+final class RoutingPatternScannerTests: XCTestCase {
+    static var allTests = [
+        ("testScanner", testScanner),
+        ("testRoundTrip", testRoundTrip)
+    ]
 
     func testScanner() {
         let cases: [String: Array<RoutingPatternToken>] = [

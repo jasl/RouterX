@@ -1,6 +1,6 @@
-language: objective-c
 os: osx
-osx_image: xcode8
+osx_image: xcode10.1
+language: swift
 
 env:
   global:
@@ -14,7 +14,7 @@ before_install:
   - bundle install
 
 script:
-  - bin/fastlane test
+  - xcodebuild test -project ./RouterX.xcodeproj -scheme RouterX-Package | bundle exec xcpretty -f `xcpretty-travis-formatter`
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

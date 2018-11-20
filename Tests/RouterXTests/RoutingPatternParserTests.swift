@@ -2,16 +2,18 @@ import Foundation
 import XCTest
 @testable import RouterX
 
-class RoutingPatternParserTests: XCTestCase {
+final class RoutingPatternParserTests: XCTestCase {
     let patternIdentifier: RouterX.PatternIdentifier = 1
 
-    override func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-    }
+    static var allTests = [
+        ("testParsingFailureShouldThrowError", testParsingFailureShouldThrowError),
+        ("testParseSlash", testParseSlash),
+        ("testParseDot", testParseDot),
+        ("testParseLiteral", testParseLiteral),
+        ("testParseSymbol", testParseSymbol),
+        ("testStar", testStar),
+        ("testParseLParen", testParseLParen)
+    ]
 
     func testParsingFailureShouldThrowError() {
         let badTokens: [RoutingPatternToken] = [.rParen, .literal("bad")]

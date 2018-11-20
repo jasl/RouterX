@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'fastlane'
-gem 'xcpretty'
-gem 'cocoapods'
+gem "xcpretty"
+gem "xcpretty-travis-formatter"
+gem "cocoapods", "~> 1.6.0.beta.2"

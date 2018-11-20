@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C47B8A8F1C7B550200C2C164"
+               BlueprintIdentifier = "RouterX::RouterX"
                BuildableName = "RouterX.framework"
-               BlueprintName = "RouterX tvOS"
+               BlueprintName = "RouterX"
                ReferencedContainer = "container:RouterX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,22 +33,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C47B8A981C7B550200C2C164"
+               BlueprintIdentifier = "RouterX::RouterXTests"
                BuildableName = "RouterXTests.xctest"
-               BlueprintName = "RouterXTests tvOS"
+               BlueprintName = "RouterXTests"
                ReferencedContainer = "container:RouterX.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C47B8A8F1C7B550200C2C164"
-            BuildableName = "RouterX.framework"
-            BlueprintName = "RouterX tvOS"
-            ReferencedContainer = "container:RouterX.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -65,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C47B8A8F1C7B550200C2C164"
+            BlueprintIdentifier = "RouterX::RouterX"
             BuildableName = "RouterX.framework"
-            BlueprintName = "RouterX tvOS"
+            BlueprintName = "RouterX"
             ReferencedContainer = "container:RouterX.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,15 +71,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C47B8A8F1C7B550200C2C164"
-            BuildableName = "RouterX.framework"
-            BlueprintName = "RouterX tvOS"
-            ReferencedContainer = "container:RouterX.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
