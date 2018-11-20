@@ -3,11 +3,11 @@ import Foundation
 public enum RoutingPatternToken {
     case slash
     case dot
-    
+
     case literal(String)
     case symbol(String)
     case star(String)
-    
+
     case lParen
     case rParen
 }
@@ -31,7 +31,7 @@ extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvert
             return "*\(value)"
         }
     }
-    
+
     public var debugDescription: String {
         switch self {
         case .slash:

@@ -19,10 +19,10 @@ public struct RoutingPatternScanner {
     private var unScannedFragment: String {
         return String(expression[position..<expression.endIndex])
     }
-    
+
     public mutating func nextToken() -> RoutingPatternToken? {
         guard !isEOF else { return nil }
-        
+
          guard let firstChar = unScannedFragment.first else { return nil }
 
         self.position = expression.index(position, offsetBy: 1)

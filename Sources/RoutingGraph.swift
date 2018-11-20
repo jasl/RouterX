@@ -23,7 +23,7 @@ extension RouteEdge: Hashable, CustomDebugStringConvertible, CustomStringConvert
     public var debugDescription: String {
         return self.description
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(description)
     }
