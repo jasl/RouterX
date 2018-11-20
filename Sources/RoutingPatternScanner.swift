@@ -17,15 +17,13 @@ public struct RoutingPatternScanner {
     }
 
     private var unScannedFragment: String {
-        return self.expression.substring(from: self.position)
+        return String(expression[position..<expression.endIndex])
     }
 
     public mutating func nextToken() -> RoutingPatternToken? {
-        if self.isEOF {
-            return nil
-        }
+        guard !isEOF else { return nil }
 
-        let firstChar = self.unScannedFragment.characters.first!
+         guard let firstChar = unScannedFragment.first else { return nil }
 
         self.position = expression.index(position, offsetBy: 1)
 
@@ -44,7 +42,7 @@ public struct RoutingPatternScanner {
 
         var fragment = ""
         var stepPosition = 0
-        for char in self.unScannedFragment.characters {
+        for char in self.unScannedFragment {
             if RoutingPatternScanner.stopWordsSet.contains(char) {
                 break
             }

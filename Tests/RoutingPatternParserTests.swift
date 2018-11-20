@@ -82,7 +82,7 @@ class RoutingPatternParserTests: XCTestCase {
         do {
             let cases: [[RoutingPatternToken]] = [
                     [.slash, .literal("foo"), .dot, .literal("me")],
-                    [.slash, .literal("foo"), .dot, .symbol("foo")],
+                    [.slash, .literal("foo"), .dot, .symbol("foo")]
             ]
 
             for tokens in cases {

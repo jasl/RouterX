@@ -38,7 +38,7 @@ router.registerRoutingPattern(pattern1) { (url, parameters, context) in
   print(string)
 }
 
-router.registerRoutingPattern(pattern2) { _ in
+router.registerRoutingPattern(pattern2) { _, _, _  in
   // Do something here, e.g: show a UI
   print("call new article")
 }
