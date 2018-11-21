@@ -3,10 +3,6 @@ import XCTest
 @testable import RouterX
 
 final class RoutingPatternScannerTests: XCTestCase {
-    static var allTests = [
-        ("testScanner", testScanner),
-        ("testRoundTrip", testRoundTrip)
-    ]
 
     func testScanner() {
         let cases: [String: Array<RoutingPatternToken>] = [

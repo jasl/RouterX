@@ -36,7 +36,6 @@
 		OBJ_63 /* RoutingPatternParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* RoutingPatternParserTests.swift */; };
 		OBJ_64 /* RoutingPatternScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* RoutingPatternScannerTests.swift */; };
 		OBJ_65 /* URLPathScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* URLPathScannerTests.swift */; };
-		OBJ_66 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* XCTestManifests.swift */; };
 		OBJ_68 /* RouterX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "RouterX::RouterX::Product" /* RouterX.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +70,6 @@
 		OBJ_23 /* RoutingPatternParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingPatternParserTests.swift; sourceTree = "<group>"; };
 		OBJ_24 /* RoutingPatternScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingPatternScannerTests.swift; sourceTree = "<group>"; };
 		OBJ_25 /* URLPathScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPathScannerTests.swift; sourceTree = "<group>"; };
-		OBJ_26 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		"RouterX::RouterX::Product" /* RouterX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +112,6 @@
 				OBJ_23 /* RoutingPatternParserTests.swift */,
 				OBJ_24 /* RoutingPatternScannerTests.swift */,
 				OBJ_25 /* URLPathScannerTests.swift */,
-				OBJ_26 /* XCTestManifests.swift */,
 			);
 			name = RouterXTests;
 			path = Tests/RouterXTests;
@@ -137,7 +134,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -145,7 +142,6 @@
 				OBJ_17 /* Tests */,
 				OBJ_27 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -237,7 +233,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_27 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -284,7 +280,6 @@
 				OBJ_63 /* RoutingPatternParserTests.swift in Sources */,
 				OBJ_64 /* RoutingPatternScannerTests.swift in Sources */,
 				OBJ_65 /* URLPathScannerTests.swift in Sources */,
-				OBJ_66 /* XCTestManifests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
