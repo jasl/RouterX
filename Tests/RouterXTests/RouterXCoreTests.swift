@@ -26,8 +26,4 @@ final class RouterXCoreTests: XCTestCase {
 
         XCTAssertNil(router.matchURL(unmatchedCase as URL))
     }
-
-    static var allTests = [
-        ("testIntegration", testIntegration)
-    ]
 }

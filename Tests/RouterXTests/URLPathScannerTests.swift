@@ -3,9 +3,6 @@ import XCTest
 @testable import RouterX
 
 class URLPathScannerTests: XCTestCase {
-    static var allTests = [
-        ("testScanner", testScanner)
-    ]
 
     func testScanner() {
         let cases: [String: Array<URLPathToken>] = [

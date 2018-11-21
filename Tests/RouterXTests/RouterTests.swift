@@ -35,9 +35,19 @@ final class RouterTests: XCTestCase {
             isUnmatchHandlerPerformed = true
         }))
         XCTAssertTrue(isUnmatchHandlerPerformed)
-    }
 
-    static var allTests = [
-        ("testIntegration", testIntegration)
-    ]
+        let pattern2 = "/band/:band_id/product"
+        let pattern2Case1 = "/band/20/product"
+        let pattern2Case2 = "/band/21"
+        let pattern2Case3 = "/band"
+
+        XCTAssertTrue(router.register(pattern: pattern2, handler: { _, parameters, _ in
+            XCTAssertEqual(parameters["band_id"], "20")
+            XCTAssertEqual(parameters.count, 1)
+        }))
+
+        XCTAssertTrue(router.match(urlPath: pattern2Case1))
+        XCTAssertFalse(router.match(urlPath: pattern2Case2))
+        XCTAssertFalse(router.match(urlPath: pattern2Case3))
+    }
 }

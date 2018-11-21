@@ -5,16 +5,6 @@ import XCTest
 final class RoutingPatternParserTests: XCTestCase {
     let patternIdentifier: RouterX.PatternIdentifier = 1
 
-    static var allTests = [
-        ("testParsingFailureShouldThrowError", testParsingFailureShouldThrowError),
-        ("testParseSlash", testParseSlash),
-        ("testParseDot", testParseDot),
-        ("testParseLiteral", testParseLiteral),
-        ("testParseSymbol", testParseSymbol),
-        ("testStar", testStar),
-        ("testParseLParen", testParseLParen)
-    ]
-
     func testParsingFailureShouldThrowError() {
         let badTokens: [RoutingPatternToken] = [.rParen, .literal("bad")]
         let route = RouteVertex()
