@@ -1,15 +1,15 @@
 import Foundation
 
-public typealias PatternIdentifier = Int
+public typealias PatternIdentifier = String
 
-public enum RouteEdge {
+internal enum RouteEdge {
     case dot
     case slash
     case literal(String)
 }
 
 extension RouteEdge: Hashable, CustomDebugStringConvertible, CustomStringConvertible {
-    public var description: String {
+    var description: String {
         switch self {
         case .literal(let value):
             return value
@@ -20,29 +20,29 @@ extension RouteEdge: Hashable, CustomDebugStringConvertible, CustomStringConvert
         }
     }
 
-    public var debugDescription: String {
+    var debugDescription: String {
         return self.description
     }
 
-    public func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(description)
     }
 }
 
-open class RouteVertex {
-    open var nextRoutes: [RouteEdge: RouteVertex] = [:]
-    open var epsilonRoute: (String, RouteVertex)?
-    open var patternIdentifier: PatternIdentifier?
+internal class RouteVertex {
+    var nextRoutes: [RouteEdge: RouteVertex] = [:]
+    var epsilonRoute: (String, RouteVertex)?
+    var patternIdentifier: PatternIdentifier?
 
-    public init(patternIdentifier: PatternIdentifier? = nil) {
+    init(patternIdentifier: PatternIdentifier? = nil) {
         self.patternIdentifier = patternIdentifier
     }
 
-    open var isTerminal: Bool {
+    var isTerminal: Bool {
         return self.patternIdentifier != nil
     }
 
-    open var isFinale: Bool {
+    var isFinale: Bool {
         return self.nextRoutes.isEmpty && self.epsilonRoute == nil
     }
 }

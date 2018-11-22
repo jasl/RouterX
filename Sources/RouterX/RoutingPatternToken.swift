@@ -1,6 +1,6 @@
 import Foundation
 
-public enum RoutingPatternToken {
+internal enum RoutingPatternToken {
     case slash
     case dot
 
@@ -13,7 +13,7 @@ public enum RoutingPatternToken {
 }
 
 extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvertible {
-    public var description: String {
+    var description: String {
         switch self {
         case .slash:
             return "/"
@@ -32,7 +32,7 @@ extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvert
         }
     }
 
-    public var debugDescription: String {
+    var debugDescription: String {
         switch self {
         case .slash:
             return "[Slash]"
@@ -54,7 +54,7 @@ extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvert
 
 extension RoutingPatternToken: Equatable { }
 
-public func == (lhs: RoutingPatternToken, rhs: RoutingPatternToken) -> Bool {
+func == (lhs: RoutingPatternToken, rhs: RoutingPatternToken) -> Bool {
     switch (lhs, rhs) {
     case (.slash, .slash):
         return true

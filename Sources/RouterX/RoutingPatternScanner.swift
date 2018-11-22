@@ -1,29 +1,29 @@
 import Foundation
 
-public struct RoutingPatternScanner {
-    fileprivate static let stopWordsSet: Set<Character> = ["(", ")", "/"]
+internal struct RoutingPatternScanner {
+    private static let stopWordsSet: Set<Character> = ["(", ")", "/"]
 
-    public let expression: String
+    let expression: String
 
     private(set) var position: String.Index
-
-    public init(expression: String) {
-        self.expression = expression
-        self.position = self.expression.startIndex
-    }
-
-    public var isEOF: Bool {
-        return self.position == self.expression.endIndex
-    }
 
     private var unScannedFragment: String {
         return String(expression[position..<expression.endIndex])
     }
 
-    public mutating func nextToken() -> RoutingPatternToken? {
+    var isEOF: Bool {
+        return self.position == self.expression.endIndex
+    }
+
+    init(expression: String) {
+        self.expression = expression
+        self.position = self.expression.startIndex
+    }
+
+    mutating func nextToken() -> RoutingPatternToken? {
         guard !isEOF else { return nil }
 
-         guard let firstChar = unScannedFragment.first else { return nil }
+        guard let firstChar = unScannedFragment.first else { return nil }
 
         self.position = expression.index(position, offsetBy: 1)
 
@@ -63,7 +63,7 @@ public struct RoutingPatternScanner {
         }
     }
 
-    public static func tokenize(_ expression: String) -> [RoutingPatternToken] {
+    static func tokenize(_ expression: String) -> [RoutingPatternToken] {
         var scanner = RoutingPatternScanner(expression: expression)
 
         var tokens: [RoutingPatternToken] = []

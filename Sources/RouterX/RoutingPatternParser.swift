@@ -1,22 +1,22 @@
 import Foundation
 
-public enum RoutingPatternParserError: Error {
+internal enum RoutingPatternParserError: Error {
     case unexpectToken(got: RoutingPatternToken?, message: String)
     case ambiguousOptionalPattern
 }
 
-open class RoutingPatternParser {
-    fileprivate typealias RoutingPatternTokenGenerator = IndexingIterator<Array<RoutingPatternToken>>
+internal class RoutingPatternParser {
+    typealias RoutingPatternTokenGenerator = IndexingIterator<Array<RoutingPatternToken>>
 
-    fileprivate let routingPatternTokens: [RoutingPatternToken]
-    fileprivate let patternIdentifier: PatternIdentifier
+    private let routingPatternTokens: [RoutingPatternToken]
+    private let patternIdentifier: PatternIdentifier
 
-    public init(routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) {
+    init(routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) {
         self.routingPatternTokens = routingPatternTokens
         self.patternIdentifier = patternIdentifier
     }
 
-    open func parseAndAppendTo(_ rootRoute: RouteVertex) throws {
+    func parseAndAppendTo(_ rootRoute: RouteVertex) throws {
         var tokenGenerator = self.routingPatternTokens.makeIterator()
         if let token = tokenGenerator.next() {
             switch token {
@@ -30,12 +30,12 @@ open class RoutingPatternParser {
         }
     }
 
-    open class func parseAndAppendTo(_ rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) throws {
+    class func parseAndAppendTo(_ rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) throws {
         let parser = RoutingPatternParser(routingPatternTokens: routingPatternTokens, patternIdentifier: patternIdentifier)
         try parser.parseAndAppendTo(rootRoute)
     }
 
-    fileprivate func parseLParen(_ context: RouteVertex, isFirstEnter: Bool = true, generator: RoutingPatternTokenGenerator) throws {
+    func parseLParen(_ context: RouteVertex, isFirstEnter: Bool = true, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         if isFirstEnter && !context.isFinale {
@@ -85,7 +85,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func parseSlash(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
+    func parseSlash(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         guard let nextToken = generator.next() else {
@@ -120,7 +120,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func parseDot(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
+    private func parseDot(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         guard let nextToken = generator.next() else {
@@ -145,7 +145,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func parseLiteral(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
+    private func parseLiteral(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         guard let nextToken = generator.next() else {
@@ -178,7 +178,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func parseSymbol(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
+    private func parseSymbol(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         guard let nextToken = generator.next() else {
@@ -211,7 +211,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func parseStar(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
+    private func parseStar(_ context: RouteVertex, value: String, generator: RoutingPatternTokenGenerator) throws {
         var generator = generator
 
         if let nextToken = generator.next() {
@@ -225,7 +225,7 @@ open class RoutingPatternParser {
         }
     }
 
-    fileprivate func contextTerminals(_ context: RouteVertex) -> [RouteVertex] {
+    private func contextTerminals(_ context: RouteVertex) -> [RouteVertex] {
         var contexts: [RouteVertex] = []
 
         if context.isTerminal {
@@ -243,7 +243,7 @@ open class RoutingPatternParser {
         return contexts
     }
 
-    fileprivate func assignPatternIdentifierIfNil(_ context: RouteVertex) {
+    private func assignPatternIdentifierIfNil(_ context: RouteVertex) {
         if context.patternIdentifier == nil {
             context.patternIdentifier = self.patternIdentifier
         }

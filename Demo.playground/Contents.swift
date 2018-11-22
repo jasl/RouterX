@@ -2,7 +2,6 @@
 
 import Foundation
 import RouterX
-
 //: Here I define some pattern
 
 let pattern1 = "/articles(/page/:page(/per_page/:per_page))(/sort/:sort)(.:format)"
@@ -13,34 +12,37 @@ let pattern4 = "/:article_id"
 //: Initialize the router, I can give a default closure to handle while given a URI path but match no one.
 
 // This is the handler that would be performed after no pattern match
-let defaultUnmatchHandler = { (url: URL, context: AnyObject?) -> Void in
-  // Do something here, e.g: give some tips or show a default UI
-  print("\(url) is unmatched.")
+let defaultUnmatchHandler: Router<Any>.UnmatchHandler = { url, context in
+    // Do something here, e.g: give some tips or show a default UI
+    print("Default unmatch handler")
+    print("\(url) is unmatched")
 
-  // context can be provided on matching patterns
-  if let context = context as? String {
-    print("Context is \"\(context)\"")
-  }
+    // context can be provided on matching patterns
+    if let context = context as? String {
+        print("Context is \"\(context)\"")
+    }
+    print("\n")
 }
 
 // Initialize a router instance, consider it's global and singleton
-let router = Router(defaultUnmatchHandler: defaultUnmatchHandler)
+// Router.T is used for specifying context type
+let router = Router<Any>(defaultUnmatchHandler: defaultUnmatchHandler)
 
 //: Register patterns, the closure is the handle when matched the pattern.
 
 // Set a route pattern, the closure is a handler that would be performed after match the pattern
-router.register(pattern: pattern1) { (url, parameters, context) in
-  // Do something here, e.g: show a UI
-  var string = "URL is \(url), parameter is \(parameters)"
-  if let context = context as? String {
-    string += " Context is \"\(context)\""
-  }
-  print(string)
+router.register(pattern: pattern1) { result in
+    // Now, registered pattern has been matched
+    // Do anything you want, e.g: show a UI
+    print(result)
+    print("\n")
+
 }
 
-router.register(pattern: pattern2) { _, _, _  in
-  // Do something here, e.g: show a UI
-  print("call new article")
+router.register(pattern: pattern2) { _ in
+    // Now, registered pattern has been matched
+    // Do anything you want, e.g: show a UI
+    print("call new article")
 }
 
 //: Let match some URI Path.
@@ -49,24 +51,25 @@ router.register(pattern: pattern2) { _, _, _  in
 let path1 = "/articles/page/2/sort/recent.json?foo=bar&baz"
 
 // It's will be matched, and perform the handler that we have set up.
-router.match(urlPath: path1)
+router.match(path1)
 // It can pass the context for handler
-router.match(urlPath: path1, context: "fooo" as AnyObject?)
+router.match(path1, context: "fooo")
 
 // A case that shouldn't be matched
 let path2 = "/articles/2/edit"
 
-let customUnmatchHandler: UnmatchRouteHandler = { (url, context) in
-  var string = "\(url) is no match..."
-  // context can be provided on matching patterns
-  if let context = context as? String {
-    string += "Context is \"\(context)\""
-  }
+let customUnmatchHandler: Router<Any>.UnmatchHandler = { (url, context) in
+    print("This is custom unmatch handler")
+    var string = "\(url) is no match..."
+    // context can be provided on matching patterns
+    if let context = context as? String {
+        string += "\nContext is \"\(context)\""
+    }
 
-  print(string)
+    print(string)
 }
 // It's will not be matched, and perform the default unmatch handler that we have set up
-router.match(urlPath: path2)
+router.match(path2)
 
 // It can provide a custome unmatch handler to override the default, also can pass the context
-router.match(urlPath: path2, context: "bar" as AnyObject?, unmatchHandler: customUnmatchHandler)
+router.match(path2, context: "bar", unmatchHandler: customUnmatchHandler)

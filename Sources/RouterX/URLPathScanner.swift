@@ -1,17 +1,17 @@
 import Foundation
 
-public struct URLPathScanner {
+internal struct URLPathScanner {
     private static let stopWordsSet: Set<Character> = [".", "/"]
 
-    public let path: String
+    let path: String
     private(set) var startIndex: String.Index
 
-    public init(path: String) {
+    init(path: String) {
         self.path = path
         self.startIndex = self.path.startIndex
     }
 
-    public var isEOF: Bool {
+    var isEOF: Bool {
         return self.startIndex == self.path.endIndex
     }
 
@@ -19,7 +19,7 @@ public struct URLPathScanner {
         return String(path[startIndex ..< path.endIndex])
     }
 
-    public mutating func nextToken() -> URLPathToken? {
+    mutating func nextToken() -> URLPathToken? {
         let unScanned = unScannedFragment
         guard let firstChar = unScanned.first else {
             // Is end of file
@@ -29,7 +29,7 @@ public struct URLPathScanner {
         let offset: Int
 
         defer {
-             startIndex = path.index(startIndex, offsetBy: offset)
+            startIndex = path.index(startIndex, offsetBy: offset)
         }
 
         switch firstChar {
@@ -50,7 +50,7 @@ public struct URLPathScanner {
         return .literal("\(literal)")
     }
 
-    public static func tokenize(_ path: String) -> [URLPathToken] {
+    static func tokenize(_ path: String) -> [URLPathToken] {
         var scanner = self.init(path: path)
 
         var tokens: [URLPathToken] = []
