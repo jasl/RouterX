@@ -36,7 +36,6 @@ router.register(pattern: pattern1) { result in
     // Do anything you want, e.g: show a UI
     print(result)
     print("\n")
-
 }
 
 router.register(pattern: pattern2) { _ in
