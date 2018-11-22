@@ -3,7 +3,7 @@ import XCTest
 @testable import RouterX
 
 final class RoutingPatternParserTests: XCTestCase {
-    let patternIdentifier: RouterX.PatternIdentifier = 1
+    let patternIdentifier: RouterX.PatternIdentifier = "/test/path"
 
     func testParsingFailureShouldThrowError() {
         let badTokens: [RoutingPatternToken] = [.rParen, .literal("bad")]

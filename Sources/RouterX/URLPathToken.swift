@@ -1,6 +1,6 @@
 import Foundation
 
-public enum URLPathToken {
+internal enum URLPathToken {
     case slash
     case dot
     case literal(String)
@@ -18,7 +18,7 @@ public enum URLPathToken {
 }
 
 extension URLPathToken: CustomStringConvertible, CustomDebugStringConvertible {
-    public var description: String {
+    var description: String {
         switch self {
         case .slash:
             return "/"
@@ -29,7 +29,7 @@ extension URLPathToken: CustomStringConvertible, CustomDebugStringConvertible {
         }
     }
 
-    public var debugDescription: String {
+    var debugDescription: String {
         switch self {
         case .slash:
             return "[Slash]"
@@ -43,7 +43,7 @@ extension URLPathToken: CustomStringConvertible, CustomDebugStringConvertible {
 
 extension URLPathToken: Equatable { }
 
-public func == (lhs: URLPathToken, rhs: URLPathToken) -> Bool {
+func == (lhs: URLPathToken, rhs: URLPathToken) -> Bool {
     switch (lhs, rhs) {
     case (.slash, .slash):
         return true

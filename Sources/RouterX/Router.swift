@@ -1,44 +1,46 @@
 import Foundation
 
-public typealias MatchRouteHandler = ((URL, _ parameters: [String: String], _ context: AnyObject?) -> Void)
-public typealias UnmatchRouteHandler = ((URL, _ context: AnyObject?) -> Void)
+open class Router<Context> {
 
-open class Router {
+    public typealias MatchedHandler = (MatchResult<Context>) -> Void
+    public typealias UnmatchHandler = ((URL, _ context: Context?) -> Void)
+
     private let core: RouterXCore = RouterXCore()
-    private let defaultUnmatchHandler: UnmatchRouteHandler?
+    private let defaultUnmatchHandler: UnmatchHandler?
 
-    private var handlerMappings: [PatternIdentifier: MatchRouteHandler] = [:]
+    private var handlerMappings: [PatternIdentifier: MatchedHandler] = [:]
 
-    public init(defaultUnmatchHandler: UnmatchRouteHandler? = nil) {
+    public init(defaultUnmatchHandler: UnmatchHandler? = nil) {
         self.defaultUnmatchHandler = defaultUnmatchHandler
     }
 
-    open func register(pattern: String, handler: @escaping MatchRouteHandler) -> Bool {
-        let patternIdentifier = pattern.hashValue
-        if self.core.registerRoutingPattern(pattern, patternIdentifier: patternIdentifier) {
-            self.handlerMappings[patternIdentifier] = handler
-
+    open func register(pattern: String, handler: @escaping MatchedHandler) -> Bool {
+        if self.core.registerRoutingPattern(pattern) {
+            self.handlerMappings[pattern] = handler
             return true
         } else {
             return false
         }
     }
 
-    open func match(url: URL, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
+    @discardableResult
+    open func match(_ url: URL, context: Context? = nil, unmatchHandler: UnmatchHandler? = nil) -> Bool {
         guard let matchedRoute = core.matchURL(url),
-        let matchHandler = handlerMappings[matchedRoute.patternIdentifier] else {
-            let expectUnmatchHandler = unmatchHandler ?? defaultUnmatchHandler
-            expectUnmatchHandler?(url, context)
-            return false
+            let matchHandler = handlerMappings[matchedRoute.patternIdentifier] else {
+                let expectUnmatchHandler = unmatchHandler ?? defaultUnmatchHandler
+                expectUnmatchHandler?(url, context)
+                return false
         }
 
-        matchHandler(url, matchedRoute.parametars, context)
+        let result = MatchResult<Context>(url: url, parameters: matchedRoute.parametars, context: context)
+        matchHandler(result)
         return true
     }
 
-    open func match(urlPath: String, context: AnyObject? = nil, unmatchHandler: UnmatchRouteHandler? = nil) -> Bool {
-        guard let url = URL(string: urlPath) else { return false }
+    @discardableResult
+    open func match(_ path: String, context: Context? = nil, unmatchHandler: UnmatchHandler? = nil) -> Bool {
+        guard let url = URL(string: path) else { return false }
 
-        return match(url: url, context: context, unmatchHandler: unmatchHandler)
+        return match(url, context: context, unmatchHandler: unmatchHandler)
     }
 }

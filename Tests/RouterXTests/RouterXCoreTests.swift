@@ -8,16 +8,15 @@ final class RouterXCoreTests: XCTestCase {
 
         let pattern1 = "/articles(/page/:page(/per_page/:per_page))(/sort/:sort)(.:format)"
         let pattern1Case = URL(string: "/articles/page/2/sort/recent.json")!
-        let pattern1Identifier = 1
 
-        XCTAssertTrue(router.registerRoutingPattern(pattern1, patternIdentifier: pattern1Identifier))
+        XCTAssertTrue(router.registerRoutingPattern(pattern1))
 
         guard let pattern1Matched = router.matchURL(pattern1Case as URL) else {
             XCTFail("\(pattern1Case) should be matched")
             return
         }
 
-        XCTAssertEqual(pattern1Matched.patternIdentifier, pattern1Identifier)
+        XCTAssertEqual(pattern1Matched.patternIdentifier, pattern1)
         XCTAssertEqual(pattern1Matched.parametars["page"], "2")
         XCTAssertEqual(pattern1Matched.parametars["sort"], "recent")
         XCTAssertEqual(pattern1Matched.parametars["format"], "json")

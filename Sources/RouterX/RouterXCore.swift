@@ -12,25 +12,25 @@ public struct MatchedRoute {
     }
 }
 
-open class RouterXCore {
+public class RouterXCore {
     private let rootRoute: RouteVertex
 
     public init() {
         self.rootRoute = RouteVertex()
     }
 
-    open func registerRoutingPattern(_ pattern: String, patternIdentifier: PatternIdentifier) -> Bool {
+    public func registerRoutingPattern(_ pattern: String) -> Bool {
         let tokens = RoutingPatternScanner.tokenize(pattern)
 
         do {
-            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: patternIdentifier)
+            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: pattern)
             return true
         } catch {
             return false
         }
     }
 
-    open func matchURL(_ url: URL) -> MatchedRoute? {
+    public func matchURL(_ url: URL) -> MatchedRoute? {
         let path = url.path
 
         let tokens = URLPathScanner.tokenize(path)
@@ -52,13 +52,13 @@ open class RouterXCore {
                 return nil
             }
         }
-        
+
         guard let pathPatternIdentifier = targetRoute.patternIdentifier else { return nil }
 
         return MatchedRoute(url: url, parameters: parameters, patternIdentifier: pathPatternIdentifier)
     }
 
-    open func matchURLPath(_ urlPath: String) -> MatchedRoute? {
+    public func matchURLPath(_ urlPath: String) -> MatchedRoute? {
         guard let url = URL(string: urlPath) else { return nil }
         return matchURL(url)
     }
