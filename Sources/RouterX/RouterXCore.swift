@@ -43,9 +43,9 @@ public class RouterXCore {
         var tokensGenerator = tokens.makeIterator()
         var targetRoute: RouteVertex = rootRoute
         while let token = tokensGenerator.next() {
-            if let determinativeRoute = targetRoute.nextRoutes[token.routeEdge] {
+            if let determinativeRoute = targetRoute.namedRoutes[token.routeEdge] {
                 targetRoute = determinativeRoute
-            } else if let epsilonRoute = targetRoute.epsilonRoute {
+            } else if let epsilonRoute = targetRoute.parameterRoute {
                 targetRoute = epsilonRoute.1
                 parameters[epsilonRoute.0] = String(describing: token).removingPercentEncoding ?? ""
             } else {
@@ -61,5 +61,15 @@ public class RouterXCore {
     public func matchURLPath(_ urlPath: String) -> MatchedRoute? {
         guard let url = URL(string: urlPath) else { return nil }
         return matchURL(url)
+    }
+}
+
+extension RouterXCore: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        return self.rootRoute.description
+    }
+
+    public var debugDescription: String {
+        return self.description
     }
 }

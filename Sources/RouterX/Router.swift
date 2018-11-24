@@ -1,7 +1,6 @@
 import Foundation
 
 open class Router<Context> {
-
     public typealias MatchedHandler = (MatchResult<Context>) -> Void
     public typealias UnmatchHandler = ((URL, _ context: Context?) -> Void)
 
@@ -42,5 +41,15 @@ open class Router<Context> {
         guard let url = URL(string: path) else { return false }
 
         return match(url, context: context, unmatchHandler: unmatchHandler)
+    }
+}
+
+extension Router: CustomDebugStringConvertible, CustomStringConvertible {
+    open var description: String {
+        return self.core.description
+    }
+
+    open var debugDescription: String {
+        return self.description
     }
 }

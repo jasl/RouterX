@@ -89,21 +89,21 @@ internal class RoutingPatternParser {
         var generator = generator
 
         guard let nextToken = generator.next() else {
-            if let terminalRoute = context.nextRoutes[.slash] {
+            if let terminalRoute = context.namedRoutes[.slash] {
                 assignPatternIdentifierIfNil(terminalRoute)
             } else {
-                context.nextRoutes[.slash] = RouteVertex(patternIdentifier: self.patternIdentifier)
+                context.namedRoutes[.slash] = RouteVertex(patternIdentifier: self.patternIdentifier)
             }
 
             return
         }
 
         var nextRoute: RouteVertex!
-        if let route = context.nextRoutes[.slash] {
+        if let route = context.namedRoutes[.slash] {
             nextRoute = route
         } else {
             nextRoute = RouteVertex()
-            context.nextRoutes[.slash] = nextRoute
+            context.namedRoutes[.slash] = nextRoute
         }
 
         switch nextToken {
@@ -128,11 +128,11 @@ internal class RoutingPatternParser {
         }
 
         var nextRoute: RouteVertex!
-        if let route = context.nextRoutes[.dot] {
+        if let route = context.namedRoutes[.dot] {
             nextRoute = route
         } else {
             nextRoute = RouteVertex()
-            context.nextRoutes[.dot] = nextRoute
+            context.namedRoutes[.dot] = nextRoute
         }
 
         switch nextToken {
@@ -149,21 +149,21 @@ internal class RoutingPatternParser {
         var generator = generator
 
         guard let nextToken = generator.next() else {
-            if let terminalRoute = context.nextRoutes[.literal(value)] {
+            if let terminalRoute = context.namedRoutes[.literal(value)] {
                 assignPatternIdentifierIfNil(terminalRoute)
             } else {
-                context.nextRoutes[.literal(value)] = RouteVertex(patternIdentifier: self.patternIdentifier)
+                context.namedRoutes[.literal(value)] = RouteVertex(patternIdentifier: self.patternIdentifier)
             }
 
             return
         }
 
         var nextRoute: RouteVertex!
-        if let route = context.nextRoutes[.literal(value)] {
+        if let route = context.namedRoutes[.literal(value)] {
             nextRoute = route
         } else {
             nextRoute = RouteVertex()
-            context.nextRoutes[.literal(value)] = nextRoute
+            context.namedRoutes[.literal(value)] = nextRoute
         }
 
         switch nextToken {
@@ -182,21 +182,21 @@ internal class RoutingPatternParser {
         var generator = generator
 
         guard let nextToken = generator.next() else {
-            if let terminalRoute = context.epsilonRoute?.1 {
+            if let terminalRoute = context.parameterRoute?.1 {
                 assignPatternIdentifierIfNil(terminalRoute)
             } else {
-                context.epsilonRoute = (value, RouteVertex(patternIdentifier: self.patternIdentifier))
+                context.parameterRoute = (value, RouteVertex(patternIdentifier: self.patternIdentifier))
             }
 
             return
         }
 
         var nextRoute: RouteVertex!
-        if let route = context.epsilonRoute?.1 {
+        if let route = context.parameterRoute?.1 {
             nextRoute = route
         } else {
             nextRoute = RouteVertex()
-            context.epsilonRoute = (value, nextRoute)
+            context.parameterRoute = (value, nextRoute)
         }
 
         switch nextToken {
@@ -218,10 +218,10 @@ internal class RoutingPatternParser {
             throw RoutingPatternParserError.unexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
         }
 
-        if let terminalRoute = context.epsilonRoute?.1 {
+        if let terminalRoute = context.parameterRoute?.1 {
             assignPatternIdentifierIfNil(terminalRoute)
         } else {
-            context.epsilonRoute = (value, RouteVertex(patternIdentifier: self.patternIdentifier))
+            context.parameterRoute = (value, RouteVertex(patternIdentifier: self.patternIdentifier))
         }
     }
 
@@ -232,11 +232,11 @@ internal class RoutingPatternParser {
             contexts.append(context)
         }
 
-        for ctx in context.nextRoutes.values {
+        for ctx in context.namedRoutes.values {
             contexts.append(contentsOf: contextTerminals(ctx))
         }
 
-        if let ctx = context.epsilonRoute?.1 {
+        if let ctx = context.parameterRoute?.1 {
             contexts.append(contentsOf: contextTerminals(ctx))
         }
 

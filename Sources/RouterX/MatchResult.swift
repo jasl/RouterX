@@ -8,9 +8,9 @@ public struct MatchResult<Context>: CustomDebugStringConvertible, CustomStringCo
     public var description: String {
         return """
         MatchResult<\(Context.self)> {
-        url: \(url)
-        parameters: \(parameters)
-        context: \(String(describing: context))
+          url: \(url)
+          parameters: \(parameters)
+          context: \(String(describing: context))
         }
         """
     }

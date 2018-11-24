@@ -5,11 +5,11 @@ extension RouteVertex {
     func toNextVertex(_ token: RouteEdge) -> RouteVertex? {
         switch token {
         case .slash:
-            return self.nextRoutes[.slash]
+            return self.namedRoutes[.slash]
         case .dot:
-            return self.nextRoutes[.dot]
+            return self.namedRoutes[.dot]
         default:
-            return self.nextRoutes[token] ?? self.epsilonRoute?.1
+            return self.namedRoutes[token] ?? self.parameterRoute?.1
         }
     }
 }
