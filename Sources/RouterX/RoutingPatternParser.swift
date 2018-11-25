@@ -16,6 +16,11 @@ internal class RoutingPatternParser {
         self.patternIdentifier = patternIdentifier
     }
 
+    class func parseAndAppendTo(_ rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) throws {
+        let parser = RoutingPatternParser(routingPatternTokens: routingPatternTokens, patternIdentifier: patternIdentifier)
+        try parser.parseAndAppendTo(rootRoute)
+    }
+
     func parseAndAppendTo(_ rootRoute: RouteVertex) throws {
         var tokenGenerator = self.routingPatternTokens.makeIterator()
         if let token = tokenGenerator.next() {
@@ -30,9 +35,38 @@ internal class RoutingPatternParser {
         }
     }
 
-    class func parseAndAppendTo(_ rootRoute: RouteVertex, routingPatternTokens: [RoutingPatternToken], patternIdentifier: PatternIdentifier) throws {
-        let parser = RoutingPatternParser(routingPatternTokens: routingPatternTokens, patternIdentifier: patternIdentifier)
-        try parser.parseAndAppendTo(rootRoute)
+    func parseSlash(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
+        var generator = generator
+
+        guard let nextToken = generator.next() else {
+            if let terminalRoute = context.namedRoutes[.slash] {
+                assignPatternIdentifierIfNil(terminalRoute)
+            } else {
+                context.namedRoutes[.slash] = RouteVertex(patternIdentifier: self.patternIdentifier)
+            }
+            return
+        }
+
+        var nextRoute: RouteVertex!
+        if let route = context.namedRoutes[.slash] {
+            nextRoute = route
+        } else {
+            nextRoute = RouteVertex()
+            context.namedRoutes[.slash] = nextRoute
+        }
+
+        switch nextToken {
+        case let .literal(value):
+            try parseLiteral(nextRoute, value: value, generator: generator)
+        case let .symbol(value):
+            try parseSymbol(nextRoute, value: value, generator: generator)
+        case let .star(value):
+            try parseStar(nextRoute, value: value, generator: generator)
+        case .lParen:
+            try parseLParen(nextRoute, generator: generator)
+        default:
+            throw RoutingPatternParserError.unexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
+        }
     }
 
     func parseLParen(_ context: RouteVertex, isFirstEnter: Bool = true, generator: RoutingPatternTokenGenerator) throws {
@@ -82,41 +116,6 @@ internal class RoutingPatternParser {
             } else {
                 throw RoutingPatternParserError.unexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
             }
-        }
-    }
-
-    func parseSlash(_ context: RouteVertex, generator: RoutingPatternTokenGenerator) throws {
-        var generator = generator
-
-        guard let nextToken = generator.next() else {
-            if let terminalRoute = context.namedRoutes[.slash] {
-                assignPatternIdentifierIfNil(terminalRoute)
-            } else {
-                context.namedRoutes[.slash] = RouteVertex(patternIdentifier: self.patternIdentifier)
-            }
-
-            return
-        }
-
-        var nextRoute: RouteVertex!
-        if let route = context.namedRoutes[.slash] {
-            nextRoute = route
-        } else {
-            nextRoute = RouteVertex()
-            context.namedRoutes[.slash] = nextRoute
-        }
-
-        switch nextToken {
-        case let .literal(value):
-            try parseLiteral(nextRoute, value: value, generator: generator)
-        case let .symbol(value):
-            try parseSymbol(nextRoute, value: value, generator: generator)
-        case let .star(value):
-            try parseStar(nextRoute, value: value, generator: generator)
-        case .lParen:
-            try parseLParen(nextRoute, generator: generator)
-        default:
-            throw RoutingPatternParserError.unexpectToken(got: nextToken, message: "Unexpect \(nextToken)")
         }
     }
 

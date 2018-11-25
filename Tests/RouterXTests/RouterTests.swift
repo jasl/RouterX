@@ -18,7 +18,8 @@ final class RouterTests: XCTestCase {
             XCTAssertTrue(result.context == "foo", "context must be foo")
         }
 
-        XCTAssertTrue(router.register(pattern: pattern1, handler: pattern1Handler))
+        XCTAssertNoThrow(try router.register(pattern: pattern1, handler: pattern1Handler))
+
         XCTAssertTrue(router.match(pattern1Case, context: "foo"))
         XCTAssertTrue(isPattern1HandlerPerformed)
 
@@ -35,7 +36,7 @@ final class RouterTests: XCTestCase {
         let pattern2Case2 = "/band/21"
         let pattern2Case3 = "/band"
 
-        XCTAssertTrue(router.register(pattern: pattern2, handler: { result in
+        XCTAssertNoThrow(try router.register(pattern: pattern2, handler: { result in
             XCTAssertEqual(result.parameters["band_id"], "20")
             XCTAssertEqual(result.parameters.count, 1)
         }))

@@ -13,18 +13,14 @@ open class Router<Context> {
         self.defaultUnmatchHandler = defaultUnmatchHandler
     }
 
-    open func register(pattern: String, handler: @escaping MatchedHandler) -> Bool {
-        if self.core.registerRoutingPattern(pattern) {
-            self.handlerMappings[pattern] = handler
-            return true
-        } else {
-            return false
-        }
+    open func register(pattern: String, handler: @escaping MatchedHandler) throws {
+        try core.register(pattern: pattern)
+        handlerMappings[pattern] = handler
     }
 
     @discardableResult
     open func match(_ url: URL, context: Context? = nil, unmatchHandler: UnmatchHandler? = nil) -> Bool {
-        guard let matchedRoute = core.matchURL(url),
+        guard let matchedRoute = core.match(url),
             let matchHandler = handlerMappings[matchedRoute.patternIdentifier] else {
                 let expectUnmatchHandler = unmatchHandler ?? defaultUnmatchHandler
                 expectUnmatchHandler?(url, context)

@@ -31,19 +31,26 @@ let router = Router<Any>(defaultUnmatchHandler: defaultUnmatchHandler)
 //: Register patterns, the closure is the handle when matched the pattern.
 
 // Set a route pattern, the closure is a handler that would be performed after match the pattern
-router.register(pattern: pattern1) { result in
-    // Now, registered pattern has been matched
-    // Do anything you want, e.g: show a UI
-    print(result)
-    print("\n")
+do {
+    try router.register(pattern: pattern1) { result in
+        // Now, registered pattern has been matched
+        // Do anything you want, e.g: show a UI
+        print(result)
+        print("\n")
+    }
+} catch let error {
+    print("register failed, reason:\n\(error.localizedDescription)\n")
 }
 
-router.register(pattern: pattern2) { _ in
+do {
+    try router.register(pattern: pattern2) { _ in
     // Now, registered pattern has been matched
     // Do anything you want, e.g: show a UI
     print("call new article")
 }
-
+} catch let error {
+    print("register failed, reason:\n\(error.localizedDescription)\n")
+}
 //: Let match some URI Path.
 
 // A case that should be matched

@@ -52,7 +52,12 @@ extension RoutingPatternToken: CustomStringConvertible, CustomDebugStringConvert
     }
 }
 
-extension RoutingPatternToken: Equatable { }
+extension RoutingPatternToken: Hashable {
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(description)
+    }
+}
 
 func == (lhs: RoutingPatternToken, rhs: RoutingPatternToken) -> Bool {
     switch (lhs, rhs) {

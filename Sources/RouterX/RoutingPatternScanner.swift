@@ -1,76 +1,68 @@
 import Foundation
 
-internal struct RoutingPatternScanner {
-    private static let stopWordsSet: Set<Character> = ["(", ")", "/"]
+private enum _PatternScanTerminator: Character {
+    case lParen = "("
+    case rParen = ")"
+    case slash = "/"
+    case dot = "."
+    case star = "*"
 
-    let expression: String
-
-    private(set) var position: String.Index
-
-    private var unScannedFragment: String {
-        return String(expression[position..<expression.endIndex])
-    }
-
-    var isEOF: Bool {
-        return self.position == self.expression.endIndex
-    }
-
-    init(expression: String) {
-        self.expression = expression
-        self.position = self.expression.startIndex
-    }
-
-    mutating func nextToken() -> RoutingPatternToken? {
-        guard !isEOF else { return nil }
-
-        guard let firstChar = unScannedFragment.first else { return nil }
-
-        self.position = expression.index(position, offsetBy: 1)
-
-        switch firstChar {
-        case "/":
-            return .slash
-        case ".":
-            return .dot
-        case "(":
-            return .lParen
-        case ")":
-            return .rParen
-        default:
-            break
+    var jointFragment: (token: RoutingPatternToken?, fragment: String) {
+        switch self {
+        case .lParen:
+            return (token: .lParen, fragment: "")
+        case .rParen:
+            return (token: .rParen, fragment: "")
+        case .slash:
+            return (token: .slash, fragment: "")
+        case .dot:
+            return (token: .dot, fragment: "")
+        case .star:
+            return (token: nil, fragment: "*")
         }
+    }
+}
 
-        var fragment = ""
-        var stepPosition = 0
-        for char in self.unScannedFragment {
-            if RoutingPatternScanner.stopWordsSet.contains(char) {
-                break
+internal struct RoutingPatternScanner {
+
+    static func tokenize(_ pattern: PatternIdentifier) -> [RoutingPatternToken] {
+        guard !pattern.isEmpty else { return [] }
+
+        var appending = ""
+        var result: [RoutingPatternToken] = pattern.reduce(into: []) { box, char in
+            guard let terminator = _PatternScanTerminator(rawValue: char) else {
+                appending.append(char)
+                return
             }
 
-            fragment.append(char)
-            stepPosition += 1
+            let jointFragment = terminator.jointFragment
+            defer {
+                if let token = jointFragment.token {
+                    box.append(token)
+                }
+                appending = jointFragment.fragment
+            }
+
+            guard let jointToken = _generateToken(expression: appending) else { return }
+            box.append(jointToken)
         }
 
-        self.position = expression.index(self.position, offsetBy: stepPosition)
-
-        switch firstChar {
-        case ":":
-            return .symbol(fragment)
-        case "*":
-            return .star(fragment)
-        default:
-            return .literal("\(firstChar)\(fragment)")
+        if let tailToken = _generateToken(expression: appending) {
+            result.append(tailToken)
         }
+        return result
     }
 
-    static func tokenize(_ expression: String) -> [RoutingPatternToken] {
-        var scanner = RoutingPatternScanner(expression: expression)
-
-        var tokens: [RoutingPatternToken] = []
-        while let token = scanner.nextToken() {
-            tokens.append(token)
+    static private func _generateToken(expression: String) -> RoutingPatternToken? {
+        guard let firstChar = expression.first else { return nil }
+        let fragments = String(expression.dropFirst())
+        switch firstChar {
+        case ":":
+            return .symbol(fragments)
+        case "*":
+            return .star(fragments)
+        default:
+            return .literal(expression)
         }
-
-        return tokens
     }
 }
