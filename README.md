@@ -12,6 +12,10 @@ See [Demo.playground](Demo.playground/Contents.swift) for now.
 
 Routing rules follows Rails flavor, see [Rails routing guide](http://guides.rubyonrails.org/routing.html#non-resourceful-routes) for now.
 
+## Features
+- [ ] globbing support
+- [ ] format validation 
+
 ## Requirements
 
 - iOS 9.0+ / Mac OS X 10.10+ / tvOS 9.0+

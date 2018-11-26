@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		48065D3321AAB88400F33408 /* PatternScanError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48065D3221AAB88400F33408 /* PatternScanError.swift */; };
 		48E62CA721A695000005838B /* MatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E62CA621A695000005838B /* MatchResult.swift */; };
 		OBJ_35 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Router.swift */; };
 		OBJ_36 /* RouterXCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* RouterXCore.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48065D3221AAB88400F33408 /* PatternScanError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternScanError.swift; sourceTree = "<group>"; };
 		48E62CA621A695000005838B /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResult.swift; sourceTree = "<group>"; };
 		OBJ_10 /* RouterXCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterXCore.swift; sourceTree = "<group>"; };
 		OBJ_11 /* RoutingGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingGraph.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				OBJ_11 /* RoutingGraph.swift */,
 				OBJ_12 /* RoutingPatternParser.swift */,
 				OBJ_13 /* RoutingPatternScanner.swift */,
+				48065D3221AAB88400F33408 /* PatternScanError.swift */,
 				OBJ_14 /* RoutingPatternToken.swift */,
 				OBJ_15 /* URLPathScanner.swift */,
 				OBJ_16 /* URLPathToken.swift */,
@@ -260,6 +263,7 @@
 				OBJ_37 /* RoutingGraph.swift in Sources */,
 				OBJ_38 /* RoutingPatternParser.swift in Sources */,
 				OBJ_39 /* RoutingPatternScanner.swift in Sources */,
+				48065D3321AAB88400F33408 /* PatternScanError.swift in Sources */,
 				OBJ_40 /* RoutingPatternToken.swift in Sources */,
 				OBJ_41 /* URLPathScanner.swift in Sources */,
 				OBJ_42 /* URLPathToken.swift in Sources */,

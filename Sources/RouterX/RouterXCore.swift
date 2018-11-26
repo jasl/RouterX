@@ -19,18 +19,41 @@ public class RouterXCore {
         self.rootRoute = RouteVertex()
     }
 
-    public func registerRoutingPattern(_ pattern: String) -> Bool {
+    public func register(pattern: String) throws {
         let tokens = RoutingPatternScanner.tokenize(pattern)
 
-        do {
-            try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: pattern)
-            return true
-        } catch {
-            return false
+        guard let prefixToken = tokens.first else { throw PatternRegisterError.empty }
+        guard prefixToken == .slash else { throw PatternRegisterError.missingPrefixSlash }
+
+        var previousToken: RoutingPatternToken?
+        var stackTokensDescription = ""
+        var parenthesisOffset = 0
+        for token in tokens {
+            switch token {
+            case .star(let globbing):
+                if previousToken != .slash { throw PatternRegisterError.invalidGlobbing(globbing: globbing, after: stackTokensDescription) }
+            case .symbol(let symbol):
+                if previousToken != .slash && previousToken != .dot { throw PatternRegisterError.invalidSymbol(symbol: symbol, after: stackTokensDescription) }
+            case .lParen:
+                parenthesisOffset += 1
+            case .rParen:
+                if parenthesisOffset <= 0 {
+                    throw PatternRegisterError.unexpectToken(after: stackTokensDescription)
+                }
+                parenthesisOffset -= 1
+            default: break
+            }
+            stackTokensDescription.append(token.description)
+            previousToken = token
         }
+
+        guard parenthesisOffset == 0 else {
+            throw PatternRegisterError.unbalanceParenthesis
+        }
+        try RoutingPatternParser.parseAndAppendTo(self.rootRoute, routingPatternTokens: tokens, patternIdentifier: pattern)
     }
 
-    public func matchURL(_ url: URL) -> MatchedRoute? {
+    public func match(_ url: URL) -> MatchedRoute? {
         let path = url.path
 
         let tokens = URLPathScanner.tokenize(path)
@@ -58,9 +81,9 @@ public class RouterXCore {
         return MatchedRoute(url: url, parameters: parameters, patternIdentifier: pathPatternIdentifier)
     }
 
-    public func matchURLPath(_ urlPath: String) -> MatchedRoute? {
-        guard let url = URL(string: urlPath) else { return nil }
-        return matchURL(url)
+    public func match(_ path: String) -> MatchedRoute? {
+        guard let url = URL(string: path) else { return nil }
+        return match(url)
     }
 }
 
