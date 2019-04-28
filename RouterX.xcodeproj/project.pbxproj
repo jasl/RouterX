@@ -76,8 +76,8 @@
 		OBJ_25 /* URLPathScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPathScannerTests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		"RouterX::RouterX::Product" /* RouterX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"RouterX::RouterXTests::Product" /* RouterXTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"RouterX::RouterX::Product" /* RouterX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RouterX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"RouterX::RouterXTests::Product" /* RouterXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RouterXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,12 +231,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"RouterX::RouterX" = {
+						LastSwiftMigration = 1020;
+					};
+					"RouterX::RouterXTests" = {
+						LastSwiftMigration = 1020;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "RouterX" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = OBJ_5;
@@ -355,7 +364,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RouterX;
 			};
 			name = Debug;
@@ -382,7 +391,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RouterX;
 			};
 			name = Release;
@@ -458,7 +467,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RouterXTests;
 			};
 			name = Debug;
@@ -483,7 +492,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = RouterXTests;
 			};
 			name = Release;

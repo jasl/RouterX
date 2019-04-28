@@ -45,7 +45,7 @@ internal struct URLPathScanner {
 
         let clipStep = unScanned.firstIndex(where: { URLPathScanner.stopWordsSet.contains($0) }) ?? unScanned.endIndex
         let literal = unScanned[unScanned.startIndex..<clipStep]
-        offset = clipStep.encodedOffset
+        offset = clipStep.utf16Offset(in: unScanned)
 
         return .literal("\(literal)")
     }
