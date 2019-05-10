@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'RouterX'
-  s.version = '0.0.7'
+  s.version = '0.1.0'
   s.license = {:type => 'MIT', :file => 'MIT-LICENSE'}
   s.summary = 'A Ruby on Rails flavored URI routing library.'
   s.homepage = 'https://github.com/jasl/RouterX'
