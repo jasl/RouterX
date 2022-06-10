@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/jasl/RouterX'
   s.authors = {'jasl' => 'jasl9187@hotmail.com'}
   s.source = {:git => 'https://github.com/jasl/RouterX.git', :tag => s.version}
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'
